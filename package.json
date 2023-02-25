@@ -1,0 +1,15 @@
+{
+  "name": "attendanceweb",
+  "version": "1.0.0",
+  "description": "Attendace Web Back End te Frond End",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com//shubham07kb/attendanceweb.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
