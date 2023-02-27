@@ -1,0 +1,15 @@
+s-att,profile,
+t-att,profile,create att,see all 
+a-att,profile,create att,see all,create class, create acc 
+
+stu -
+details- name,age,gender,uid,class,subjects,
+pages-   home,profile,att,med,att apply,subject
+
+teachers -
+details- name,age,gender,uid,classes,subjects,
+pages-   home,profile,att,med,att apply,classes,subject,students
+
+admin -
+details- name,age,gender,uid,
+pages-   home,profile,att,med,att apply,classes,subject,students,teacher,create class,create profile,delete student,approve med
