@@ -13,3 +13,8 @@ pages-   home,profile,att,med,att apply,classes,subject,students
 admin -
 details- name,age,gender,uid,
 pages-   home,profile,att,med,att apply,classes,subject,students,teacher,create class,create profile,delete student,approve med
+
+
+database
+
+users - 

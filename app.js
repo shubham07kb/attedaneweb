@@ -11,6 +11,7 @@ const compression    = require('compression');
 const a           =require('./libs/app/init');
 const port           = process.env.PORT || 3000;
 process.env.rootpath =__dirname;
+a.setup(process.env);
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.set('views', path.join(__dirname, 'host/html'));                 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');                                      app.use(express.static(path.join(__dirname, 'static')));
