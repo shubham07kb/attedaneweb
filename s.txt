@@ -17,4 +17,9 @@ pages-   home,profile,att,med,att apply,classes,subject,students,teacher,create 
 
 database
 
-users - 
+studentss - UID, Name, Password, Email, DOB, Gender, Address, Stream, Stream Code, Section,
+Teachers - UID, Name, Password, Email, DOB, Gender, Address, Class Incharge of, Extra Roles,
+Admin - UID, Name, Password, Email, DOB, Gender, Address, Dept, 
+Branch - code, Year, Name, Subs 
+Sub Branch (Sections) - Code, Year of Start, Year of End, Current Sem, Start UID, Last UID, subject{Year{Sem{Subject Codes}}}
+Subjects - Subject Code, Name, Credits 

@@ -4,6 +4,9 @@ function apphandle(req, res,path,port,os,fs,env){
     if(a[1]=='app.js'){
         res.header("Content-Type", "application/javascript");
         p='isssl="'+env.isssl+'";';
+        p+='webdarkcss=`'+env.isssl+'`;';
+        p+='weblightcss=`'+env.isssl+'`;';
+        p+='webcss=`'+env.isssl+'`;';
         p+=fs.readFileSync(env.rootpath+'/host/js/app.js');
         res.send(p);
     } else{
