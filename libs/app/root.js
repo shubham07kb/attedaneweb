@@ -9,6 +9,12 @@ function apphandle(req, res,path,port,os,fs,env){
         p+='webcss=`'+env.isssl+'`;';
         p+=fs.readFileSync(env.rootpath+'/host/js/app.js');
         res.send(p);
+    } else if(a[1]=='sys' && (a[2]=='acchandler')){
+        if(a[1]=='sys'){
+            if(a[2]=='acchandler'){
+                res.send('done');
+            }
+        }
     } else{
         res.header("Content-Type", "text/html");
         res.render('index.html');
