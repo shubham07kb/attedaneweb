@@ -1,4 +1,15 @@
 {
     "server":"localhost",
-    "isssl":false
+    "isssl":false,
+    "db":{
+        "s":"mongodb",
+        "url":"mongodb+srv://Shubhamkb:Shubhamkb@cudatabase.jejqgjq.mongodb.net/?retryWrites=true&w=majority",
+        "dbname":"cudb"
+    },
+    "security_keys": {
+        "jwt_key": "hbhg7ryvyfGvYGV67gb",
+        "jwt_key_method": "HS512",
+        "jwt_key_v": "nhfn3e8y7rfewqbhu",
+        "jwt_key_method_v": "HS512"
+    }
 }

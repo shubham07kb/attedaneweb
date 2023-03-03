@@ -1,6 +1,7 @@
-const fs=require('fs');
-function apphandle(req, res,path,port,os,fs,env){
-    a=req.params[0].split('/')
+const mod=require('../connect');
+function apphandle(req,res,path,port,os,fs,env){
+    a=req.params[0].split('/');
+    // console.log(req.body);
     if(a[1]=='app.js'){
         res.header("Content-Type", "application/javascript");
         p='isssl="'+env.isssl+'";';
@@ -12,7 +13,7 @@ function apphandle(req, res,path,port,os,fs,env){
     } else if(a[1]=='sys' && (a[2]=='acchandler')){
         if(a[1]=='sys'){
             if(a[2]=='acchandler'){
-                res.send('done');
+                mod.acchandler(req,res,path,port,os,fs,env);
             }
         }
     } else{
@@ -22,4 +23,4 @@ function apphandle(req, res,path,port,os,fs,env){
 }
 module.exports={
     apphandle:apphandle
-};
+}; 
