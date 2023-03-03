@@ -1,4 +1,5 @@
 {
+    "sitename":"CU",
     "server":"localhost",
     "isssl":false,
     "db":{

@@ -4,7 +4,8 @@ function apphandle(req,res,path,port,os,fs,env){
     // console.log(req.body);
     if(a[1]=='app.js'){
         res.header("Content-Type", "application/javascript");
-        p='isssl="'+env.isssl+'";';
+        p='sitename="'+env.sitename+'";';
+        p+='isssl="'+env.isssl+'";';
         p+='webdarkcss=`'+env.isssl+'`;';
         p+='weblightcss=`'+env.isssl+'`;';
         p+='webcss=`'+env.isssl+'`;';
@@ -18,7 +19,7 @@ function apphandle(req,res,path,port,os,fs,env){
         }
     } else{
         res.header("Content-Type", "text/html");
-        res.render('index.html');
+        res.render('index.html',{title:env.sitename});
     }
 }
 module.exports={
