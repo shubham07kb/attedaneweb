@@ -1,5 +1,6 @@
 {
     "sitename":"CU",
+    "siteurl":"localhost",
     "server":"localhost",
     "isssl":false,
     "db":{
@@ -9,8 +10,8 @@
     },
     "security_keys": {
         "jwt_key": "hbhg7ryvyfGvYGV67gb",
-        "jwt_key_method": "HS512",
+        "jwt_key_method": "HS256",
         "jwt_key_v": "nhfn3e8y7rfewqbhu",
-        "jwt_key_method_v": "HS512"
+        "jwt_key_method_v": "HS256"
     }
 }

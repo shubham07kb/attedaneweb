@@ -52,8 +52,10 @@ async function acchandler(req,res,path,port,os,fs,env){
             res.send('{"status":"error","statusCode":0,"msg":"Incorrect parameters"}');
         }
     } else if(req.body.t=='cr'){
-        let t1=jwt.verify(req.cookies.accdata+req.cookies.accheader+req.cookies.acckey,env.jwtk);
-        let t2=jwt.verify(req.cookies.accvdata+req.cookies.accvheader+req.cookies.accvkey,env.jwtkv);
+        console.log(req.cookies.accdata+'.'+req.cookies.accheader+'.'+req.cookies.acckey);
+        console.log(req.cookies.accvdata+'.'+req.cookies.accvheader+'.'+req.cookies.accvkey);
+        let t1=jwt.verify(req.cookies.accdata+'.'+req.cookies.accheader+'.'+req.cookies.acckey,env.jwtk,{algorithms:env.jwtkm});
+        let t2=jwt.verify(req.cookies.accvdata+'.'+req.cookies.accvheader+'.'+req.cookies.accvkey,env.jwtkv,{algorithms:env.jwtkm});
         if(t1==t2){
             res.send('{"status":"success","statusCode":1,"run":"loadcr(this.responseText)","data":'+JSON.stringify(tokend)+'}');
         } else{
