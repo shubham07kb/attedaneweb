@@ -157,15 +157,23 @@ function loginapply(res){
     }
 }
 async function callpage(){
-    const udata=await loadurldata();
-    if(udata.urlpna[0]=='webauthn'){
-        webauthpage();
-    } else if(udata.urlpna[0]=='logout'){
-        logout();
-    } else{
-        applytheme();
-
-    }
+    cl('e');
+    const successCallback = async (position) =>  {
+        cl('success');
+        const udata=await loadurldata();
+        if(udata.urlpna[0]=='webauthn'){
+            webauthpage();
+        } else if(udata.urlpna[0]=='logout'){
+            logout();
+        } else{
+            applytheme();
+        }
+    };
+    const errorCallback = (error) => {
+        gebi('style').innerHTML=logpagecss;
+        gebi('main').innerHTML=`<div id="telalogin"><div class="container-fundo"><div id="logo-cliente"><h1>CU</h1></div><div class="container-logins"><h2>Allow Location Permisson</h2><br><h4>Fast Login</h4><div class="login"><button class="botao-login" onClick="ps('/');setls('isWebAuthnActive',1,);callpage()">Allow</button></div></div></div></div>`;
+    }; 
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 }
 async function pageload(){
     
@@ -189,17 +197,28 @@ async function oneajax(a,b=''){
         }
     };
 }
-function loadcr(a){
-    cl('load');
+function loadcr(res){
+    res=JSON.parse(res);
+    if(res.statusCode==0){
+        logout();
+    } else if(res.statusCode==1){
+        callpage();
+    }
 }
-function logout(){
-    // removeAllCookie();
-    location.reload();
+async function logout(){
+    removeAllCookie();
+    const udata=await loadurldata();
+    if(udata.urlpna[0]=='logout'){
+        ps('/');
+    }
+    loadlogin();
 }
 async function app(){
+    cl('app');
     if(isssl=='y'){await httpscheck()}
     presetup();
     if(getCookie('accdata')!=undefined && getCookie('accdata')!=null && getCookie('accdata')!='' && getCookie('accheader')!=undefined && getCookie('accheader')!=null && getCookie('accheader')!='' && getCookie('acckey')!=undefined && getCookie('acckey')!=null && getCookie('acckey')!='' && getCookie('accvdata')!=undefined && getCookie('accvdata')!=null && getCookie('accvdata')!='' && getCookie('accvheader')!=undefined && getCookie('accvheader')!=null && getCookie('accvheader')!='' && getCookie('accvkey')!=undefined && getCookie('accvkey')!=null && getCookie('accvkey')){
+        cl('in');
         oneajax('/sys/acchandler','t=cr');
         // gebi('main').innerHTML='<h1>logged in</h1><br><button type="button" onClick="logout()">Log Out</button>';
     } else{

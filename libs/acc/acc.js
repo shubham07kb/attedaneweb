@@ -55,15 +55,14 @@ async function acchandler(req,res,path,port,os,fs,env){
         try{
             let t1=jwt.verify(req.cookies.accheader+'.'+req.cookies.accdata+'.'+req.cookies.acckey,env.jwtk);
             let t2=jwt.verify(req.cookies.accvheader+'.'+req.cookies.accvdata+'.'+req.cookies.accvkey,env.jwtkv);
-            if(t1==t2){
-                res.send('{"status":"success","statusCode":1,"run":"loadcr(this.responseText)","data":'+JSON.stringify(tokend)+'}');
+            if(JSON.stringify(t1)==JSON.stringify(t2)){
+                res.send('{"status":"success","statusCode":1,"run":"loadcr(this.responseText)"}');
             } else{
                 res.send('{"status":"error","statusCode":0,"msg":"Incorrect or Expired credentials","run":"loadcr(this.responseText)"}');
             }
         } catch(e){
             res.send('{"status":"error","statusCode":0,"msg":"Incorrect or Expired credentials","run":"loadcr(this.responseText)"}');
         }
-        
     }
 }
 async function r(pass){
