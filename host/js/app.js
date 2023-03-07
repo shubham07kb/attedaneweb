@@ -176,7 +176,7 @@ async function setCookie(cname,cvalue,exdays){const d=new Date();d.setTime(d.get
 async function httpscheck(){if(window.location.protocol=='http:'){window.location.href=window.location.href.replace('http:','https:');}}
 async function loadurldata(){var urldata=[];urldata['url']=window.location.href;urldata['urlp']=window.location.protocol;urldata['urlh']=window.location.host;urldata['urlpn']=window.location.pathname;urldata['urlpna']=window.location.pathname.split('/');urldata['urlpna'].shift();urldata['urlse']=window.location.search;var urlsef=new URLSearchParams(urldata['urlse']);var urlsea=[];for(const [key,value] of urlsef){urlsea[key]=value;}urldata['urlsea']=urlsea;return urldata;}
 async function switchtheme(a) {if (a == "a") {setCookie("theme_mode", "a", 365);}else if (a == "d") {setCookie("theme_mode", "d", 365);}else if (a == "l") {setCookie("theme_mode", "l", 365);}else if (a == "s") {if (getCookie("theme_mode") == "a") {setCookie("theme_mode", "d", 365);}else if (getCookie("theme_mode") == "d") {setCookie("theme_mode", "l", 365);}else if (getCookie("theme_mode") == "l") {setCookie("theme_mode", "a", 365);}}else {cl("Error: Invalid theme mode");throw("Error: Invalid theme mode");}applytheme();}async function theme() {if (checkCookie("theme_mode") == true) {if (getCookie("theme_mode") == "a") {setCookie("theme", "a", 365);}else if (getCookie("theme_mode") == "d") {setCookie("theme", "d", 365);}else if (getCookie("theme_mode") == "l") {setCookie("theme", "l", 365);}applytheme(getCookie("theme"));}else {if (typeof prefered_theme_mode != "undefined") {if (prefered_theme_mode == "a" && prefered_theme_mode == "d" && prefered_theme_mode == "l") {switchtheme(prefered_theme_mode);}else {switchtheme("a");}}else {switchtheme("a");}theme();}}function applytheme() {let a=getCookie('theme'); if(a=="a"){gebi("style").innerHTML = "@media(prefers-color-scheme:dark){" + webdarkcss + "}@media(prefers-color-scheme:light){" + weblightcss + "}" + webcss}else if(a=="d"){gebi("style").innerHTML = webcss + webdarkcss}else if(a=="l"){gebi("style").innerHTML = webcss + weblightcss}}
-async function ps(a,b=sitename){let stateObj={id:"100"};window.history.pushState(stateObj, b, a);callpage();}
+async function ps(a,b=sitename){let stateObj={id:"100"};window.history.pushState(stateObj, b, a);}
 async function oneajax(a,b=''){
     xhttp=new XMLHttpRequest();
     xhttp.open("POST", a, true);
@@ -201,8 +201,7 @@ async function app(){
     presetup();
     if(getCookie('accdata')!=undefined && getCookie('accdata')!=null && getCookie('accdata')!='' && getCookie('accheader')!=undefined && getCookie('accheader')!=null && getCookie('accheader')!='' && getCookie('acckey')!=undefined && getCookie('acckey')!=null && getCookie('acckey')!='' && getCookie('accvdata')!=undefined && getCookie('accvdata')!=null && getCookie('accvdata')!='' && getCookie('accvheader')!=undefined && getCookie('accvheader')!=null && getCookie('accvheader')!='' && getCookie('accvkey')!=undefined && getCookie('accvkey')!=null && getCookie('accvkey')){
         oneajax('/sys/acchandler','t=cr');
-        callpage();
-        gebi('main').innerHTML='<h1>logged in</h1><br><button type="button" onClick="logout()">Log Out</button>';
+        // gebi('main').innerHTML='<h1>logged in</h1><br><button type="button" onClick="logout()">Log Out</button>';
     } else{
         await theme();
         loadlogin();
