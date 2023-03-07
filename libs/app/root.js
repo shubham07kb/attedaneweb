@@ -2,7 +2,11 @@ const mod=require('../connect');
 function apphandle(req,res,path,port,os,fs,env){
     a=req.params[0].split('/');
     // console.log(req.body);
-    if(a[1]=='app.js'){
+    if(a[1]=='favicon.ico'){
+        res.header('Content-Type','image/x-icon');
+        res.send(fs.readFileSync(env.rootpath+'/host/img/favicon.ico'));
+    }
+    else if(a[1]=='app.js'){
         res.header("Content-Type", "application/javascript");
         p='sitename="'+env.sitename+'";';
         p+='siteurl="'+env.siteurl+'";';

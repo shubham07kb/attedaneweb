@@ -158,22 +158,47 @@ function loginapply(res){
 }
 async function callpage(){
     cl('e');
-    const successCallback = async (position) =>  {
-        cl('success');
-        const udata=await loadurldata();
-        if(udata.urlpna[0]=='webauthn'){
-            webauthpage();
-        } else if(udata.urlpna[0]=='logout'){
-            logout();
-        } else{
-            applytheme();
+    const udata=await loadurldata();
+    console.table(udata);
+    if(udata.urlpna[0]=='webauthn'){
+        webauthpage();
+    } else if(udata.urlpna[0]=='logout'){
+        logout();
+    } else{
+        applytheme();
+        if(udata.urlpna[0]=='' || udata.urlpna[0]=='home'){
+            
+        } else if(udata.urlpna[0]=='attendance'){
+            
+        } else if(udata.urlpna[0]=='createattendance'){
+            
+        } else if(udata.urlpna[0]=='createacc'){
+            
+        } else if(udata.urlpna[0]=='profile'){
+            
+        } else if(udata.urlpna[0]=='timetable'){
+            
+        } else if(udata.urlpna[0]=='createsubject'){
+            
+        } else if(udata.urlpna[0]=='createclass'){
+            
+        } else if(udata.urlpna[0]=='createbranch'){
+            
+        } else if(udata.urlpna[0]=='applymed'){
+            
+        } else if(udata.urlpna[0]=='approvemed'){
+            
         }
-    };
-    const errorCallback = (error) => {
-        gebi('style').innerHTML=logpagecss;
-        gebi('main').innerHTML=`<div id="telalogin"><div class="container-fundo"><div id="logo-cliente"><h1>CU</h1></div><div class="container-logins"><h2>Allow Location Permisson</h2><br><h4>Fast Login</h4><div class="login"><button class="botao-login" onClick="ps('/');setls('isWebAuthnActive',1,);callpage()">Allow</button></div></div></div></div>`;
-    }; 
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    }
+    // const successCallback = async (position) =>  {
+    //     cl('success');
+        
+    // };
+    // const errorCallback = (error) => {
+    //     gebi('style').innerHTML=logpagecss;
+    //     gebi('main').innerHTML=`<div id="telalogin"><div class="container-fundo"><div id="logo-cliente"><h1>CU</h1></div><div class="container-logins"><h2>Allow Location Permisson</h2><div class="login"><button class="botao-login" onClick="ps('/');setls('isWebAuthnActive',1,);callpage()">Check</button></div></div></div></div>`;
+    // }; 
+    // navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 }
 async function pageload(){
     
