@@ -1,8 +1,8 @@
+const fs             = require('fs');
 const express        = require('express');
 const cors           = require('cors');
 const app            = express();
-const http           = require('http').createServer(app);
-const fs             = require('fs');
+const http           = require('https').createServer({key: fs.readFileSync('./security/cert.key'), cert: fs.readFileSync('./security/cert.pem')},app);
 const path           = require('path');
 const os             = require('os');
 const cookieParser   = require('cookie-parser');

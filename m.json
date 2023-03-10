@@ -1,0 +1,67 @@
+{
+    "name": "WhatsApp Web",
+    "short_name": "WhatsApp Web",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#f0f2f5",
+    "theme_color": "#f0f2f5",
+    "description": "Quickly send and receive WhatsApp messages right from your computer.",
+    "icons": [
+        {
+            "src": "./whatsapp_pwa_icon_16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "./whatsapp_pwa_icon_32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "./whatsapp_pwa_icon_60.png",
+            "sizes": "60x60",
+            "type": "image/png"
+        },
+        {
+            "src": "./whatsapp_pwa_icon_64.png",
+            "sizes": "64x64",
+            "type": "image/png"
+        },
+        {
+            "src": "./whatsapp_pwa_icon_90.png",
+            "sizes": "90x90",
+            "type": "image/png"
+        },
+        {
+            "src": "./whatsapp_pwa_icon_128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "./whatsapp_pwa_icon_192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "./whatsapp_pwa_icon_512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "./whatsapp_pwa_icon_512.svg",
+            "sizes": "512x512",
+            "type": "image/svg",
+            "purpose": "maskable"
+        }
+    ],
+    "related_applications": [
+        {
+            "platform": "windows",
+            "url": "ms-windows-store://pdp/?productid=9NKSQGP7F2NH&mode=mini"
+        },
+        {
+            "platform": "itunes",
+            "url": "https://apps.apple.com/us/app/whatsapp-desktop/id1147396723"
+        }
+    ]
+}
