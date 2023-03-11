@@ -2,7 +2,7 @@
     "sitename":"CU",
     "siteurl":"localhost",
     "server":"localhost",
-    "isssl":true,
+    "isssl":false,
     "db":{
         "s":"mongodb",
         "url":"mongodb+srv://Shubhamkb:Shubhamkb@cudatabase.jejqgjq.mongodb.net/?retryWrites=true&w=majority",
