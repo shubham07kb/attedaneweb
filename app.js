@@ -19,4 +19,4 @@ app.use(cors());                                                     app.use(url
 app.use(compression());                                              app.use(cookieParser(httpOnly=false));
 app.all('*', (req, res) => {a.root(req,res,path,port,os,fs,process.env);});
 function run(http){a.setup(process.env);http.listen(port, () => {console.log(`App running at ${port}`);});}
-run(http);
+run(http);  
