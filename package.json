@@ -4,7 +4,8 @@
   "description": "Attendace Web Back End te Frond End",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "app": "nodemon app.js",
+    "test": "nodemon test.js"
   },
   "repository": {
     "type": "git",

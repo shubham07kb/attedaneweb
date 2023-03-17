@@ -1,5 +1,34 @@
-const mod=require('../connect');
-function apphandle(req,res,path,port,os,fs,env){
+const { endsWith } = require('lodash');
+const mod = require('../connect');
+async function getfiles(fs, f) {
+    d=[]
+    e = fs.readdirSync(f);
+    for (i = 0; i < e.length; i++) {
+        if (fs.statSync(f + "/" + e[i]).isDirectory()) { 
+            g = await getfiles(fs, f + "/" + e[i]);
+            e = await addarray(d, g);
+        } else {
+            d.push(f + "/" + e[i]);
+        }
+    }
+    return d;
+}
+async function addarray(e, f) {
+    for (let i = 0; i < f.length; i++) {
+        e.push(f[i]);
+    }
+    return e;
+}
+async function onlyhcj(path, e) {
+    let d=[]
+    for (let i = 0; i < e.length; i++) {
+        if ((e[i].endsWith('.html') || e[i].endsWith('.css') || e[i].endsWith('.js')) && (!e[i].endsWith('.min.html') && !e[i].endsWith('.min.css') && !e[i].endsWith('.min.js'))) {
+            d.push(e[i]);
+        }
+    }
+    return d;
+}
+async function apphandle(req,res,path,port,os,fs,env){
     a=req.params[0].split('/');
     // console.log(req.body);
     if(a[1]=='favicon.ico'){
@@ -17,14 +46,20 @@ function apphandle(req,res,path,port,os,fs,env){
         p+=fs.readFileSync(env.rootpath+'/host/js/cbor.js');
         p+=fs.readFileSync(env.rootpath+'/host/js/app.js');
         res.send(p);
-    } else if(a[1]=='sys' && (a[2]=='acchandler' || a[2]=='minify')){
+    } else if(a[1]=='sys' && (a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
         if(a[1]=='sys'){
             if(a[2]=='acchandler'){
                 mod.acchandler(req,res,path,port,os,fs,env);
-            } else if(a[2]=='minify'){
-                mod.minifier(env);
-                res.header("Content-Type", "application/javascript");
-                res.send('{"status":"ok","msg":"ok"}');
+            } else if (a[2] == 'minify') {
+                const css = await getfiles(fs, env.rootpath + '/host/css');
+                const html = await  getfiles(fs, env.rootpath + '/host/html');
+                const js = await  getfiles(fs, env.rootpath + '/host/js');
+                let all = await addarray(html, css).then(e => e);
+                all = await addarray(all, js).then(e => e);
+                all = await onlyhcj(path, all);
+                mod.minify(all,env,res);
+                // res.header("Content-Type", "application/javascript");
+                // res.send('{"status":"ok","msg":"ok"}');
             }
         }
     } else{

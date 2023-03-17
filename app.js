@@ -9,7 +9,9 @@ const cookieParser   = require('cookie-parser');
 const bodyParser     = require('body-parser');
 const compression    = require('compression');
 const a              = require('./libs/app/init');
-const port           = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
+m = { 'as': 'df' };
+k = ['dwc', 'vgdcw'];
 process.env.rootpath = __dirname;
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.set('views', path.join(__dirname, 'host/html'));                 app.engine('html', require('ejs').renderFile);
@@ -19,4 +21,4 @@ app.use(cors());                                                     app.use(url
 app.use(compression());                                              app.use(cookieParser(httpOnly=false));
 app.all('*', (req, res) => {a.root(req,res,path,port,os,fs,process.env);});
 function run(http){a.setup(process.env);http.listen(port, () => {console.log(`App running at ${port}`);});}
-run(http);  
+run(http);

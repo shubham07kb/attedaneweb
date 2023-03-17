@@ -233,7 +233,7 @@ function loadcr(res) {
 async function logout() {
     removeAllCookie();
     const udata = await loadurldata();
-    if (udata.urlpna[0] == 'logout') {
+    if (udata.urlpna[0] == 'logout'){
         ps('/');
     }
     loadlogin();

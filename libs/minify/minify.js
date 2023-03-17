@@ -1,53 +1,93 @@
+const htmlminify = require('./html.minify.js');
+const cssminify = require('./css.minify.js');
+const jsminify = require('./js.minify.js');
 const fs = require('fs');
-const readline = require('readline');
-async function htmlmin(htmlloc) {
-  fs.readdirSync(htmlloc).forEach(async (filee) => {
-    if (filee.endsWith(".html") && !filee.endsWith(".min.html")) {
-      const fn = filee.substring(0, filee.length - 5);
-      const file = readline.createInterface({ input: fs.createReadStream(htmlloc + filee), output: process.stdout, terminal: false });
-      if (fs.existsSync(htmlloc + fn + ".min.html")) {
-        fs.unlinkSync(htmlloc + fn + ".min.html")
-      }
-      file.on('line', async (line) => {
-        fs.appendFileSync(htmlloc + fn + '.min.html', line.replace(/\s\s+/g, ' '));
-      });
+const path = require('path');
+async function minify(e,env, res, { html, css, js } = {}) {
+    d = [];
+    let htmlg = [];
+    let cssg = [];
+    let jsg = [];
+    if (typeof e === "string") {
+        d.push(e);
+    } else if (typeof e === "object" && typeof e.length === "number" && e.length != 0) {
+        d = e;
     }
-  });
-}
-async function cssmin(cssloc) {
-  fs.readdirSync(cssloc).forEach(async (filee) => {
-    if (filee.endsWith(".css") && !filee.endsWith(".min.css")) {
-      const fn = filee.substring(0, filee.length - 4);
-      if (fs.existsSync(cssloc + fn + ".min.css")) {
-        fs.unlinkSync(cssloc + fn + ".min.css")
-      }
-      const file = readline.createInterface({ input: fs.createReadStream(cssloc + filee), output: process.stdout, terminal: false });
-      file.on('line', async (line) => {
-        fs.appendFileSync(cssloc + fn + '.min.css', line.replace(/\s\s+/g, ' '));
-      });
+    for (let i = 0; i < d.length; i++) {
+        if (d[i].endsWith('.html')) {
+            htmlg.push(d[i]);
+        } else if (d[i].endsWith('.css')) {
+            cssg.push(d[i]);
+        } else if (d[i].endsWith('.js')) { 
+            jsg.push(d[i]);
+        }
     }
-  });
-}
-async function jsmin(jsloc) {
-  fs.readdirSync(jsloc).forEach(async (filee) => {
-    if (filee.endsWith(".js") && !filee.endsWith(".min.js")) {
-      const fn = filee.substring(0, filee.length - 3);
-      if (fs.existsSync(jsloc + fn + ".min.js")) {
-        fs.unlinkSync(jsloc + fn + ".min.js")
-      }
-      const file = readline.createInterface({ input: fs.createReadStream(jsloc + filee), output: process.stdout, terminal: false });
-      file.on('line', async (line) => {
-        fs.appendFileSync(jsloc + fn + '.min.js', line.replace(/\s\s+/g, ' '));
-      });
+    cssminify.cssminify(cssg[0]);
+    jsminify.jsminify(jsg[0],res);
+    fd = false;
+    if (typeof html === "object" && typeof html.length === undefined) {
+        if (htmlg.length == 1 && (html.filename != undefined && html.filename != "" && html.filename != null)) { 
+            t = 'sf';
+            fn = html.filename;
+            fd = true;
+        } else if (htmlg.length == 1) {
+            t = 'sf';
+            fn = path.win32.basename(htmlg[0]);
+        } else {
+            t = 'mf';
+        }
+    } else {
+        if (htmlg.length == 1) {
+            t = 'sf';
+            fn = path.win32.basename(htmlg[0]);
+        } else {
+            t = 'mf';
+        }
     }
-  });
-}
-async function doing(env) {
-  aaa = env.rootpath;
-  await htmlmin(aaa + "/host/html/");
-  await cssmin(aaa + "/host/css/");
-  await jsmin(aaa + "/host/js/");
+    if (t == 'sf') {
+        htmls = await htmlminify.htmlminify(htmlg[0]);
+        if (fd == true) {
+            if (!fn.endsWith('.html') && !fn.endsWith('.htm')) {
+                fn = fn + '.html';
+            }
+        }
+        fnss = await fs.existsSync(fn);
+        if (fnss == true)  {
+            await fs.unlinkSync(fn);
+        }
+
+    }
+    fd = false;
+    if (typeof css === "object" && typeof css.length === undefined) {
+        if (css.type = 'single' && (css.filename != undefined || css.filename != "" || css.filename != null)) {
+            t = 'sf';
+            fn = css.filename;
+            fd = true;
+        } else {
+            t = 'mf';
+        }
+        if (cssg.length == 1 && (css.filename != undefined && css.filename != "" && css.filename != null)) {
+            t = 'sf';
+            fn = css.filename;
+            fd = true;
+        }
+    }
+    fd = false;
+    if (typeof js === "object" && typeof js.length === undefined) {
+        if (js.type = 'single' && (js.filename != undefined || js.filename != "" || js.filename != null)) {
+            t = 'sf';
+            fn = js.filename;
+            fd = true;
+        } else {
+            t = 'mf';
+        }
+        if (jsg.length == 1 && (js.filename != undefined && js.filename != "" && js.filename != null)) {
+            t = 'sf';
+            fn = js.filename;
+            fd = true;
+        }
+    } 
 }
 module.exports = {
-  doing: doing
-} 
+  minify:minify
+}
