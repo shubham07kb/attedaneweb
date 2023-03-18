@@ -2,6 +2,7 @@
     "name": "Chandigarh University",
     "short_name": "CU",
     "description": "Uims",
+    "start_url": "/",
     "icons": [
       {
         "src": "/content/img/ico-16.ico",
@@ -55,7 +56,6 @@
         "type": "image/png"
       }
     ],
-    "start_url": "/",
     "display": "standalone",
     "theme_color": "#ffffff",
     "background_color": "#ffffff"
