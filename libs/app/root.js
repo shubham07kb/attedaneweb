@@ -45,7 +45,7 @@ async function apphandle(req,res,path,port,os,fs,env){
         p+=fs.readFileSync(env.rootpath+'/host/js/cbor.js');
         p+=fs.readFileSync(env.rootpath+'/host/js/app.js');
         res.send(p);
-    } else if(a[1]=='app.js'){
+    } else if(a[1]=='manifest.json'){
         res.send(fs.readFileSync(env.rootpath+'/host/json/manifest.json'))
     } else if(a[1]=='sys' && (a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
         if(a[1]=='sys'){
