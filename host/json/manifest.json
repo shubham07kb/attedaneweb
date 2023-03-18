@@ -51,7 +51,7 @@
         "purpose": "any maskable"
       },
       {
-        "src": "/content/img/ico-512.ico",
+        "src": "/content/img/ico-512.png",
         "sizes": "512x512",
         "type": "image/png"
       }
