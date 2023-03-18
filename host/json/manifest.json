@@ -4,52 +4,53 @@
     "description": "Uims",
     "icons": [
       {
-        "src": "/content/host/img/ico-16.ico",
+        "src": "/content/img/ico-16.ico",
         "sizes": "16x16",
         "type": "image/ico"
       },
       {
-        "src": "/content/host/img/ico-32.ico",
+        "src": "/content/img/ico-32.ico",
         "sizes": "32x32",
         "type": "image/ico"
       },
       {
-        "src": "/content/host/img/ico-128.ico",
+        "src": "/content/img/ico-128.ico",
         "sizes": "128x128",
         "type": "image/ico"
       },
       {
-        "src": "/content/host/img/ico-256.ico",
+        "src": "/content/img/ico-256.ico",
         "sizes": "256x256",
         "type": "image/ico"
       },
       {
-        "src": "/content/host/img/ico-72.ico",
+        "src": "/content/img/ico-72.ico",
         "sizes": "72x72",
         "type": "image/ico"
       },
       {
-        "src": "/content/host/img/ico-48.ico",
+        "src": "/content/img/ico-48.ico",
         "sizes": "48x48",
         "type": "image/ico"
       },
       {
-        "src": "/content/host/img/ico-64.ico",
+        "src": "/content/img/ico-64.ico",
         "sizes": "64x64",
         "type": "image/ico"
       },
       {
-        "src": "/content/host/img/ico-80.ico",
+        "src": "/content/img/ico-80.ico",
         "sizes": "80x80",
         "type": "image/ico"
       },
       {
-        "src": "/content/host/img/ico-96.ico",
+        "src": "/content/img/ico-96.ico",
         "sizes": "96x96",
-        "type": "image/ico"
+        "type": "image/ico",
+        "purpose": "any maskable"
       },
       {
-        "src": "/content/host/img/ico-512.ico",
+        "src": "/content/img/ico-512.ico",
         "sizes": "512x512",
         "type": "image/png"
       }

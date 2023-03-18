@@ -8,7 +8,7 @@ class account {
     }
 }
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/content/host/js/sw.js')
+    navigator.serviceWorker.register('/content/js/sw.js')
         .then(function (registration) {
             console.log('Service worker registered successfully:', registration);
         })
