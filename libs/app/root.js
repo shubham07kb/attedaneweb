@@ -34,8 +34,7 @@ async function apphandle(req,res,path,port,os,fs,env){
     if(a[1]=='favicon.ico'){
         res.header('Content-Type','image/x-icon');
         res.send(fs.readFileSync(env.rootpath+'/host/img/favicon.ico'));
-    }
-    else if(a[1]=='app.js'){
+    } else if(a[1]=='app.js'){
         res.header("Content-Type", "application/javascript");
         p='sitename="'+env.sitename+'";';
         p+='siteurl="'+env.siteurl+'";';
@@ -46,6 +45,8 @@ async function apphandle(req,res,path,port,os,fs,env){
         p+=fs.readFileSync(env.rootpath+'/host/js/cbor.js');
         p+=fs.readFileSync(env.rootpath+'/host/js/app.js');
         res.send(p);
+    } else if(a[1]=='app.js'){
+        res.send(fs.readFileSync(env.rootpath+'/host/json/manifest.json'))
     } else if(a[1]=='sys' && (a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
         if(a[1]=='sys'){
             if(a[2]=='acchandler'){
