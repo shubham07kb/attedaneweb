@@ -6,46 +6,51 @@
       {
         "src": "/content/host/img/ico-16.ico",
         "sizes": "16x16",
-        "type": "image/png"
+        "type": "image/ico"
       },
       {
         "src": "/content/host/img/ico-32.ico",
         "sizes": "32x32",
-        "type": "image/png"
+        "type": "image/ico"
       },
       {
         "src": "/content/host/img/ico-128.ico",
         "sizes": "128x128",
-        "type": "image/png"
+        "type": "image/ico"
       },
       {
         "src": "/content/host/img/ico-256.ico",
         "sizes": "256x256",
-        "type": "image/png"
+        "type": "image/ico"
       },
       {
         "src": "/content/host/img/ico-72.ico",
         "sizes": "72x72",
-        "type": "image/png"
+        "type": "image/ico"
       },
       {
         "src": "/content/host/img/ico-48.ico",
         "sizes": "48x48",
-        "type": "image/png"
+        "type": "image/ico"
       },
       {
         "src": "/content/host/img/ico-64.ico",
         "sizes": "64x64",
-        "type": "image/png"
+        "type": "image/ico"
       },
       {
         "src": "/content/host/img/ico-80.ico",
         "sizes": "80x80",
-        "type": "image/png"
+        "type": "image/ico"
       },
       {
         "src": "/content/host/img/ico-96.ico",
         "sizes": "96x96",
+        "type": "image/ico"
+      },
+      {
+        "src": "/content/host/img/ico-512.ico",
+        "sizes": "512x512",
         "type": "image/png"
       }
     ],
