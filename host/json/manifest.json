@@ -1,6 +1,6 @@
 {
-  "name": "My PWA",
-  "short_name": "MyPWA",
+  "name": "Chandigarh University",
+  "short_name": "CU",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

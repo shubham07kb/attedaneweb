@@ -28,8 +28,8 @@ async function onlyhcj(path, e) {
     }
     return d;
 }
-async function apphandle(req,res,path,port,os,fs,env){
-    a=req.params[0].split('/');
+async function apphandle(req, res, path, port, os, fs, env) {
+    a = req.params[0].split('/');
     // console.log(req.body);
     if(a[1]=='favicon.ico'){
         res.header('Content-Type','image/x-icon');
@@ -45,8 +45,13 @@ async function apphandle(req,res,path,port,os,fs,env){
         p+=fs.readFileSync(env.rootpath+'/host/js/cbor.js');
         p+=fs.readFileSync(env.rootpath+'/host/js/app.js');
         res.send(p);
-    } else if(a[1]=='manifest.json'){
-        res.send(fs.readFileSync(env.rootpath+'/host/json/manifest.json'))
+    } else if (a[1] == 'manifest.json') {
+        res.header("Content-Type", "application/json");
+        res.send(fs.readFileSync(env.rootpath + '/host/json/manifest.json'));
+    } else if (a[1] == 'sw.js') {
+        res.header("Content-Type", "application/javascript");
+        p = fs.readFileSync(env.rootpath + '/host/js/sw.js');
+        res.send(p);
     } else if(a[1]=='sys' && (a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
         if(a[1]=='sys'){
             if(a[2]=='acchandler'){

@@ -10,7 +10,7 @@ class account {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker
-            .register('/content/js/sw.js')
+            .register('/sw.js',{scope:'/'})
             .then(reg=>console.log('Service registered:', reg))
             .catch(err=>console.log('Service worker registration failed:', err));
     });
