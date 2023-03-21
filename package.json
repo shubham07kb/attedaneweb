@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "app": "nodemon app.js",
-    "test": "nodemon test.js"
+    "test": "nodemon test.js",
+    "git": "git add . && git commit -m "
+
   },
   "repository": {
     "type": "git",
