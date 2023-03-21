@@ -1,62 +1,35 @@
 {
-    "name": "Chandigarh University",
-    "short_name": "CU",
-    "description": "Uims",
-    "start_url": "/",
-    "icons": [
-      {
-        "src": "/content/img/ico-16.ico",
-        "sizes": "16x16",
-        "type": "image/ico"
-      },
-      {
-        "src": "/content/img/ico-32.ico",
-        "sizes": "32x32",
-        "type": "image/ico"
-      },
-      {
-        "src": "/content/img/ico-128.ico",
-        "sizes": "128x128",
-        "type": "image/ico"
-      },
-      {
-        "src": "/content/img/ico-256.ico",
-        "sizes": "256x256",
-        "type": "image/ico"
-      },
-      {
-        "src": "/content/img/ico-72.ico",
-        "sizes": "72x72",
-        "type": "image/ico"
-      },
-      {
-        "src": "/content/img/ico-48.ico",
-        "sizes": "48x48",
-        "type": "image/ico"
-      },
-      {
-        "src": "/content/img/ico-64.ico",
-        "sizes": "64x64",
-        "type": "image/ico"
-      },
-      {
-        "src": "/content/img/ico-80.ico",
-        "sizes": "80x80",
-        "type": "image/ico"
-      },
-      {
-        "src": "/content/img/ico-96.ico",
-        "sizes": "96x96",
-        "type": "image/ico",
-        "purpose": "any maskable"
-      },
-      {
-        "src": "/content/img/ico-512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
-    ],
-    "display": "standalone",
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff"
+  "name": "My PWA",
+  "short_name": "MyPWA",
+  "start_url": ".",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4caf50",
+  "icons": [
+    {
+      "src": "/content/img/ico-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/content/img/ico-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/content/img/ico-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/content/img/ico-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }
