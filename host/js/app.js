@@ -172,9 +172,10 @@ async function callpage() {
     } else if (udata.urlpna[0] == 'logout') {
         logout();
     } else {
+        gebi('content').innerHTML = udata.urlpna[0];
         applytheme();
         if (udata.urlpna[0] == '' || udata.urlpna[0] == 'home') {
-
+            gebi('content').innerHTML = 'home';
         } else if (udata.urlpna[0] == 'attendance') {
 
         } else if (udata.urlpna[0] == 'createattendance') {
