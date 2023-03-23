@@ -42,6 +42,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         p+='webdarkcss=`'+fs.readFileSync(env.rootpath+'/host/css/webdark.css')+'`;';
         p+='weblightcss=`'+fs.readFileSync(env.rootpath+'/host/css/weblight.css')+'`;';
         p += 'webcss=`' + fs.readFileSync(env.rootpath + '/host/css/web.css') + '`;';
+        p += 'inhtml=`' + fs.readFileSync(env.rootpath + '/host/html/inner.html') + '`;';
         reqip = req.header('x-forwarded-for') || req.socket.remoteAddress;
         p += 'reqip="' + reqip +'";';
         p+=fs.readFileSync(env.rootpath+'/host/js/cbor.js');

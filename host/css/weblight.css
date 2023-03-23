@@ -1,0 +1,16 @@
+body {
+    background-color: #F5F5F5;
+    color: #000000;
+}
+
+.navbar {
+    background-color: #2C2F33;
+    color: #FFFFFF;
+}
+
+.navbar-links a {
+    color: #FFFFFF;
+}
+#mode-th::after {
+    content: "Light Mode";
+}
