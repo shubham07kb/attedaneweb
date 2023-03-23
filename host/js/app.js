@@ -252,9 +252,9 @@ async function makeip(){
 }
 async function isipok() {
     if (getCookie('ip') != undefined && getCookie('ip') != '' && getCookie('ip') !== null && getls('ip') != undefined && getls('ip') != '' && getls('ip') !== null) {
-        if (getCookie('ip') != getls('ip')) {
+        if (decodeURI(getCookie('ip')) != getls('ip')) {
             let t = await makeip();
-            setCookie('ip', t, 1);
+            setCookie('ip', encodeURI(t), 1);
             setls('ip', t);
         }
     } else {
