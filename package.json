@@ -6,7 +6,7 @@
   "scripts": {
     "app": "nodemon app.js",
     "test": "nodemon test.js",
-    "git": "git add . && git commit -m "
+    "git": "git add . && git commit -m 'first commit' && git push -u origin main"
 
   },
   "repository": {

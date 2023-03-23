@@ -246,10 +246,30 @@ async function logout() {
     }
     loadlogin();
 }
+async function makeip(){
+    return await fetch("https://ipwho.is/" + reqip + "?fields=ip,message,success,type,continent,continent_code,country,country_code,region,region_code,city,latitude,longitude,postal,calling_code,calling_code,capital,borders,flag,connection.isp,connection.domain,timezone").then((a => a.json())).then((a => JSON.stringify(a)));
+    
+}
+async function isipok() {
+    if (getCookie('ip') != undefined && getCookie('ip') != '' && getCookie('ip') !== null && getls('ip') != undefined && getls('ip') != '' && getls('ip') !== null) {
+        if (getCookie('ip') != getls('ip')) {
+            let t = await makeip();
+            setCookie('ip', t, 1);
+            setls('ip', t);
+        }
+    } else {
+        let t = await makeip();
+        setCookie('ip', t, 1);
+        setls('ip', t);
+    }
+    
+
+}
 async function app() {
     cl('app');
     if (isssl == 'y') { await httpscheck() }
     presetup();
+    await isipok();
     if (getCookie('accdata') != undefined && getCookie('accdata') != null && getCookie('accdata') != '' && getCookie('accheader') != undefined && getCookie('accheader') != null && getCookie('accheader') != '' && getCookie('acckey') != undefined && getCookie('acckey') != null && getCookie('acckey') != '' && getCookie('accvdata') != undefined && getCookie('accvdata') != null && getCookie('accvdata') != '' && getCookie('accvheader') != undefined && getCookie('accvheader') != null && getCookie('accvheader') != '' && getCookie('accvkey') != undefined && getCookie('accvkey') != null && getCookie('accvkey')) {
         cl('in');
         oneajax('/sys/acchandler', 't=cr');
