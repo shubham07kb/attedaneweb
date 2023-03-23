@@ -251,13 +251,16 @@ async function makeip(){
     
 }
 async function isipok() {
-    if (getCookie('ip') != undefined && getCookie('ip') != '' && getCookie('ip') !== null && getls('ip') != undefined && getls('ip') != '' && getls('ip') !== null) {
+    if (reqip == '::1') {
+        return 0;
+    } else if (getCookie('ip') != undefined && getCookie('ip') != '' && getCookie('ip') !== null && getls('ip') != undefined && getls('ip') != '' && getls('ip') !== null) {
         let tt = decodeURI(getCookie('ip'))
         if (tt != getls('ip')) {
             let t = await makeip();
             let ttt = encodeURI(t);
             setCookie('ip', ttt, 1);
             setls('ip', t);
+            return 0;
         } else {
             let k = JSON.parse(getls('ip'));
             if (k.ip != reqip) {
@@ -265,6 +268,9 @@ async function isipok() {
                 let ttt = encodeURI(t);
                 setCookie('ip', ttt, 1);
                 setls('ip', t);
+                return 0;
+            } else {
+                return 0;
             }
         }
     } else {
@@ -272,20 +278,24 @@ async function isipok() {
         let ttt = encodeURI(t);
         setCookie('ip', ttt, 1);
         setls('ip', t);
+        return 0;
     }
 }
 async function app() {
     cl('app');
     if (isssl == 'y') { await httpscheck() }
     presetup();
-    await isipok();
-    if (getCookie('accdata') != undefined && getCookie('accdata') != null && getCookie('accdata') != '' && getCookie('accheader') != undefined && getCookie('accheader') != null && getCookie('accheader') != '' && getCookie('acckey') != undefined && getCookie('acckey') != null && getCookie('acckey') != '' && getCookie('accvdata') != undefined && getCookie('accvdata') != null && getCookie('accvdata') != '' && getCookie('accvheader') != undefined && getCookie('accvheader') != null && getCookie('accvheader') != '' && getCookie('accvkey') != undefined && getCookie('accvkey') != null && getCookie('accvkey')) {
-        cl('in');
-        oneajax('/sys/acchandler', 't=cr');
-        // gebi('main').innerHTML='<h1>logged in</h1><br><button type="button" onClick="logout()">Log Out</button>';
-    } else {
-        await theme();
-        loadlogin();
+    ipdone = 1;
+    ipdone = await isipok();
+    if (ipdone == 0) {
+        if (getCookie('accdata') != undefined && getCookie('accdata') != null && getCookie('accdata') != '' && getCookie('accheader') != undefined && getCookie('accheader') != null && getCookie('accheader') != '' && getCookie('acckey') != undefined && getCookie('acckey') != null && getCookie('acckey') != '' && getCookie('accvdata') != undefined && getCookie('accvdata') != null && getCookie('accvdata') != '' && getCookie('accvheader') != undefined && getCookie('accvheader') != null && getCookie('accvheader') != '' && getCookie('accvkey') != undefined && getCookie('accvkey') != null && getCookie('accvkey')) {
+            cl('in');
+            oneajax('/sys/acchandler', 't=cr');
+            // gebi('main').innerHTML='<h1>logged in</h1><br><button type="button" onClick="logout()">Log Out</button>';
+        } else {
+            await theme();
+            loadlogin();
+        }
     }
 }
 app();
