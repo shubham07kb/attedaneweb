@@ -252,20 +252,27 @@ async function makeip(){
 }
 async function isipok() {
     if (getCookie('ip') != undefined && getCookie('ip') != '' && getCookie('ip') !== null && getls('ip') != undefined && getls('ip') != '' && getls('ip') !== null) {
-        let tt=decodeURI(getCookie('ip'))
+        let tt = decodeURI(getCookie('ip'))
         if (tt != getls('ip')) {
             let t = await makeip();
-            let ttt = await encodeURI(t)
+            let ttt = encodeURI(t);
             setCookie('ip', ttt, 1);
             setls('ip', t);
+        } else {
+            let k = JSON.parse(getls('ip'));
+            if (k.ip != reqip) {
+                let t = await makeip();
+                let ttt = encodeURI(t);
+                setCookie('ip', ttt, 1);
+                setls('ip', t);
+            }
         }
     } else {
         let t = await makeip();
-        setCookie('ip', t, 1);
+        let ttt = encodeURI(t);
+        setCookie('ip', ttt, 1);
         setls('ip', t);
     }
-    
-
 }
 async function app() {
     cl('app');
