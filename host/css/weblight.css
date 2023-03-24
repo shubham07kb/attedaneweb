@@ -9,7 +9,7 @@ body {
 }
 
 .navbar-links a {
-    color: #FFFFFF;
+    color: #000000;
 }
 #mode-th::after {
     content: "Light Mode";
