@@ -40,7 +40,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         var ptime = new Date();
         ptime = new Date(ptime.getTime() + (330 + ptime.getTimezoneOffset()) * 60000);
         const formatMap = {mm: ptime.getMonth() + 1, dd: ptime.getDate(), yyyy: ptime.getFullYear(), h: ptime.getHours(), m: ptime.getMinutes()};
-        p+='cltime="' + JSON.stringify(formatMap) + '";';
+        p+='cltime=`' + JSON.stringify(formatMap) + '`;';
         p+='siteurl="'+env.siteurl+'";';
         p+='isssl="'+env.isssl+'";';
         p+='webdarkcss=`'+fs.readFileSync(env.rootpath+'/host/css/webdark.css')+'`;';
