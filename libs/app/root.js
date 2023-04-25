@@ -60,11 +60,11 @@ async function apphandle(req, res, path, port, os, fs, env) {
             mod.acchandler(req,res,path,port,os,fs,env);
         } else if (a[2] == 'cron') { 
             res.header('Content-Type', 'application/json');
-            if (req.query.pass=='atten'){
-                res.send(req.query.pass + ' accepted');
+            if (req.query.pass=='atten' && req.body.pass=='dance'){
+                res.send(req.query.pass + req.query.pass + ' accepted');
                 mod.cron();
             } else {
-                res.send(req.query.pass + ' not accepted');
+                res.send(req.query.pass + req.query.pass + ' not accepted');
             }
         } else if (a[2] == 'minify') {
             const css = await getfiles(fs, env.rootpath + '/host/css');
