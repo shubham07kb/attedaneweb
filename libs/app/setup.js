@@ -40,10 +40,6 @@ function init(env){
         }
     }
 }
-function cron() {
-    
-}
 module.exports={ 
-    init: init,
-    cron: cron
+    init: init
 } 
