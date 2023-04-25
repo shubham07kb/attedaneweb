@@ -55,21 +55,26 @@ async function apphandle(req, res, path, port, os, fs, env) {
         res.header("Content-Type", "application/javascript");
         p = fs.readFileSync(env.rootpath + '/host/js/sw.js');
         res.send(p);
-    } else if(a[1]=='sys' && (a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
-        if(a[1]=='sys'){
-            if(a[2]=='acchandler'){
-                mod.acchandler(req,res,path,port,os,fs,env);
-            } else if (a[2] == 'minify') {
-                const css = await getfiles(fs, env.rootpath + '/host/css');
-                const html = await  getfiles(fs, env.rootpath + '/host/html');
-                const js = await  getfiles(fs, env.rootpath + '/host/js');
-                let all = await addarray(html, css).then(e => e);
-                all = await addarray(all, js).then(e => e);
-                all = await onlyhcj(path, all);
-                mod.minify(all,env,res);
-                // res.header("Content-Type", "application/javascript");
-                // res.send('{"status":"ok","msg":"ok"}');
+    } else if(a[1]=='sys' && (a[2]=='cron' || a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
+        if(a[2]=='acchandler'){
+            mod.acchandler(req,res,path,port,os,fs,env);
+        } else if (a[2] == 'cron') { 
+            res.header('Content-Type', 'application/json');
+            res.send(req.body.pass);
+            console.log(req.body.pass);
+            if (req.pass && req.body.pass == '') {
+                
             }
+        } else if (a[2] == 'minify') {
+            const css = await getfiles(fs, env.rootpath + '/host/css');
+            const html = await  getfiles(fs, env.rootpath + '/host/html');
+            const js = await  getfiles(fs, env.rootpath + '/host/js');
+            let all = await addarray(html, css).then(e => e);
+            all = await addarray(all, js).then(e => e);
+            all = await onlyhcj(path, all);
+            mod.minify(all,env,res);
+            // res.header("Content-Type", "application/javascript");
+            // res.send('{"status":"ok","msg":"ok"}');
         }
     } else{
         res.header("Content-Type", "text/html");
