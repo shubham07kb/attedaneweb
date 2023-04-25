@@ -36,7 +36,9 @@ async function apphandle(req, res, path, port, os, fs, env) {
         res.send(fs.readFileSync(env.rootpath+'/host/img/favicon.ico'));
     } else if(a[1]=='app.js'){
         res.header("Content-Type", "application/javascript");
-        p='sitename="'+env.sitename+'";';
+        p = 'sitename="' + env.sitename + '";';
+        ptime = new Date().toLocaleString();
+        p+='cltime="' + ptime + '";';
         p+='siteurl="'+env.siteurl+'";';
         p+='isssl="'+env.isssl+'";';
         p+='webdarkcss=`'+fs.readFileSync(env.rootpath+'/host/css/webdark.css')+'`;';
@@ -60,11 +62,11 @@ async function apphandle(req, res, path, port, os, fs, env) {
             mod.acchandler(req,res,path,port,os,fs,env);
         } else if (a[2] == 'cron') { 
             res.header('Content-Type', 'application/json');
-            if (req.query.pass=='atten' && req.body.pass=='dance'){
-                res.send(req.query.pass + req.body.pass + ' accepted');
+            if (req.query.pass=='atten'){
+                res.send(req.query.pass + ' accepted');
                 mod.cron();
             } else {
-                res.send(req.query.pass + req.body.pass + ' not accepted');
+                res.send(req.query.pass + ' not accepted');
             }
         } else if (a[2] == 'minify') {
             const css = await getfiles(fs, env.rootpath + '/host/css');
@@ -85,3 +87,5 @@ async function apphandle(req, res, path, port, os, fs, env) {
 module.exports={
     apphandle:apphandle
 }; 
+
+
