@@ -8,10 +8,10 @@ const os             = require('os');
 const cookieParser   = require('cookie-parser');
 const bodyParser     = require('body-parser');
 const compression    = require('compression');
-const a              = require('./libs/app/init');
+const a = require('./libs/app/init');
 const port = process.env.PORT || 3000;
 process.env.rootpath = __dirname;
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var urlencodedParser = bodyParser.urlencoded({ extended: false }); 
 app.set('views', path.join(__dirname, 'host/html'));                 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');                                      app.use(express.static(path.join(__dirname, 'static')));
 app.use('/content', express.static(path.join(__dirname, 'host')));   app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])

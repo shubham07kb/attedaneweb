@@ -66,7 +66,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
             t1 = jwt.verify(req.cookies.accheader + '.' + req.cookies.accdata + '.' + req.cookies.acckey, env.jwtk);
             page.pin(a, req, res, t1, env, path, os, fs, port);
         } catch (e) {
-            res.send('{"error":expired"}');
+            res.redirect('/');
         }
     } else if(a[1]=='sys' && (a[2]=='cron' || a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
         if(a[2]=='acchandler'){

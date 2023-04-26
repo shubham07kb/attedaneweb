@@ -25,8 +25,6 @@ async function pin(a, req, res, t1, env, path, os, fs, port) {
                     resend += `<th style="border:1px solid blue">` + r[0].tt[0][loop1].f + `-` + r[0].tt[0][loop1].t + `<br>Period-` + (loop1+1) +`</th>`;
                 }
                 resend += '</tr>';
-                console.log(rtnp);
-                console.log(rtnp1);
                 for (loop1 = 1; loop1 <= 6; loop1++) {
                     1 == loop1 ? wd = "Monday" : 2 == loop1 ? wd = "Tuesday" : 3 == loop1 ? wd = "Wednesday" : 4 == loop1 ? wd = "Thursday" : 5 == loop1 ? wd = "Friday" : 6 == loop1 && (wd = "Saturday");
                     resend += `<tr style="border:1px solid blue"><td style="border:1px solid blue;text-align:center">`+wd+`</td>`;
@@ -48,22 +46,27 @@ async function pin(a, req, res, t1, env, path, os, fs, port) {
             res.send('No timetable found for ' + t1.uid);
         }
     } else if (a[2] == 'profile') {
-        if (t1.at == 's') { 
-            tn = 'students';
+        if (t1.at == 's') {
             sta = 'Student';
         } else if (t1.at == 't') {
-            tn = 'teachers';
             sta = 'Teacher';
         } else if (t1.at == 'a') {
-            tn = 'employees';
             sta = 'Employee';
         }
-        r = await db.query({ uid: t1.uid }, tn, env);
-        if (r.length == 1) {
-            resend=
-            res.send(r);
-        } else {
-            res.send('{"error":"UID Data Not able to Fetch"}');
+        resend = `<h1>Profile of UID: `+t1.uid+`</h1>
+        <h4><b>Name</b>: `+ t1.name + `</h4>
+        <h4><b>Email</b>: `+ t1.email + `</h4>
+        <h4><b>University Email</b>: `+ t1.uemail + `</h4>
+        <h4><b>Gender</b>: `+ t1.gen + `</h4>
+        <h4><b>Date of Birth</b>: `+ t1.dob + `</h4>
+        <h4><b>Address</b>: `+ t1.adr + `</h4>
+        <h4><b>Type of Profile</b>:`+ sta +`</h4>`;
+        res.send(resend);
+    } else if (a[2] == 'meta') {
+        if (a[3]=='timetable') {
+            res.send('working yo');
+        } else if (a[3] == 'profile') {
+            res.send('working yo');
         }
     } else {
         res.send('page not found');

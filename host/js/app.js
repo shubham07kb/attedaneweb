@@ -172,7 +172,7 @@ async function callpage() {
     } else if (udata.urlpna[0] == 'logout') {
         logout();
     } else {
-        gebi('content').innerHTML = udata.urlpna[0];
+        gebi('content').innerHTML = 'Loading...';
         applytheme();
         if (udata.urlpna[0] == '' || udata.urlpna[0] == 'home') {
             
@@ -183,9 +183,9 @@ async function callpage() {
         } else if (udata.urlpna[0] == 'createacc') {
 
         } else if (udata.urlpna[0] == 'profile') {
-
+            propagereq('profile')
         } else if (udata.urlpna[0] == 'timetable') {
-            
+            propagereq('timetable')
         } else if (udata.urlpna[0] == 'createsubject') {
 
         } else if (udata.urlpna[0] == 'createclass') {
@@ -229,6 +229,21 @@ async function oneajax(a, b = '') {
         }
     };
 }
+async function propagereq(n) {
+    xhrp = new XMLHttpRequest();
+    xhrd = new XMLHttpRequest();
+    onRequestsComplete([xhrp, xhrd], function (requests, unsuccessful) { 
+        if (unsuccessful) {
+            return;
+        } else {
+            gebi('content').innerHTML = requests[0].responseText;
+        }
+    });
+    xhrp.open("GET", "/sp/"+n, true);
+    xhrd.open("GET", "/sp/meta/"+n, true);
+    xhrp.send();
+    xhrd.send();
+}
 function loadcr(res) {
     res = JSON.parse(res);
     if (res.statusCode == 0) {
@@ -247,7 +262,6 @@ async function logout() {
 }
 async function makeip(){
     return await fetch("https://ipwho.is/" + reqip + "?fields=ip,message,success,type,continent,continent_code,country,country_code,region,region_code,city,latitude,longitude,postal,calling_code,calling_code,capital,borders,flag,connection.isp,connection.domain,timezone").then((a => a.json())).then((a => JSON.stringify(a)));
-    
 }
 async function isipok() {
     if (reqip == '::1') {
