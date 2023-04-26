@@ -1,5 +1,7 @@
 const { endsWith } = require('lodash');
 const mod = require('../connect');
+const page = require('./page');
+const jwt = require("jsonwebtoken");
 async function getfiles(fs, f) {
     d=[]
     e = fs.readdirSync(f);
@@ -39,7 +41,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         p = 'sitename="' + env.sitename + '";';
         var ptime = new Date();
         ptime = new Date(ptime.getTime() + (330 + ptime.getTimezoneOffset()) * 60000);
-        const formatMap = {mm: ptime.getMonth() + 1, dd: ptime.getDate(), yyyy: ptime.getFullYear(), h: ptime.getHours(), m: ptime.getMinutes()};
+        const formatMap = { mm: ptime.getMonth() + 1, dd: ptime.getDate(), yyyy: ptime.getFullYear(), d: ptime.getDay(),h: ptime.getHours(), m: ptime.getMinutes()};
         p+='cltime=`' + JSON.stringify(formatMap) + '`;';
         p+='siteurl="'+env.siteurl+'";';
         p+='isssl="'+env.isssl+'";';
@@ -59,6 +61,13 @@ async function apphandle(req, res, path, port, os, fs, env) {
         res.header("Content-Type", "application/javascript");
         p = fs.readFileSync(env.rootpath + '/host/js/sw.js');
         res.send(p);
+    } else if (a[1] == 'sp') {
+        try {
+            t1 = jwt.verify(req.cookies.accheader + '.' + req.cookies.accdata + '.' + req.cookies.acckey, env.jwtk);
+            page.pin(a, req, res, t1, env, path, os, fs, port);
+        } catch (e) {
+            res.send('{"error":expired"}');
+        }
     } else if(a[1]=='sys' && (a[2]=='cron' || a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
         if(a[2]=='acchandler'){
             mod.acchandler(req,res,path,port,os,fs,env);

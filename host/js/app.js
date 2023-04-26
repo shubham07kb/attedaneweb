@@ -185,7 +185,7 @@ async function callpage() {
         } else if (udata.urlpna[0] == 'profile') {
 
         } else if (udata.urlpna[0] == 'timetable') {
-
+            
         } else if (udata.urlpna[0] == 'createsubject') {
 
         } else if (udata.urlpna[0] == 'createclass') {

@@ -1,8 +1,8 @@
 MongoClient = require('mongodb').MongoClient;
-async function query(a,b,c,d){
+async function query(a,b,c,d,e={}){
   var db = await MongoClient.connect(c);
   var dbo =await db.db(d);
-  return await dbo.collection(a).find(b).toArray();
+  return await dbo.collection(a).find(b,e).toArray();
 }
 async function insert(a,b,c,d){
   var db = await MongoClient.connect(c);
