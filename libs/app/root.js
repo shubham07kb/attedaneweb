@@ -75,7 +75,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
             res.header('Content-Type', 'application/json');
             if (req.query.pass=='atten'){
                 res.send(req.query.pass + ' accepted');
-                mod.cron();
+                mod.cron(env);
             } else {
                 res.send(req.query.pass + ' not accepted');
             }
