@@ -36,6 +36,9 @@ async function apphandle(req, res, path, port, os, fs, env) {
     if(a[1]=='favicon.ico'){
         res.header('Content-Type','image/x-icon');
         res.send(fs.readFileSync(env.rootpath+'/host/img/favicon.ico'));
+    } else if (a[1] == 'd') {
+        res.header("Content-Type", "text/html");
+        res.send('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><script defer="defer" src="/content/other/face-api.min.js"></script><script defer="defer" src="/content/other/script.js"></script><title>Face Recognition</title><style>body{margin:0;padding:0;width:100vw;height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column}canvas{position:absolute;top:0;left:0}</style></head><body><input type="file" id="imageUpload"></body></html>');
     } else if(a[1]=='app.js'){
         res.header("Content-Type", "application/javascript");
         p = 'sitename="' + env.sitename + '";';
