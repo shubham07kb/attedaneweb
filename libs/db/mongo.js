@@ -28,7 +28,8 @@ async function update(a,b,c,d,e){
   var db = await MongoClient.connect(d);
   var dbo =await db.db(e);
   try{
-    var r=await dbo.collection(a).updateOne(c,{$set:b});
+    var r = await dbo.collection(a).updateOne(c, b);
+    console.log(r);
     return {status:'success',statcode:1,message:r};
   } catch(e){
     return {status:'error',statcode:0,message:e};

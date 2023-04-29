@@ -33,29 +33,26 @@ async function onlyhcj(path, e) {
 async function apphandle(req, res, path, port, os, fs, env) {
     a = req.params[0].split('/');
     // console.log(req.body);
-    if(a[1]=='favicon.ico'){
-        res.header('Content-Type','image/x-icon');
-        res.send(fs.readFileSync(env.rootpath+'/host/img/favicon.ico'));
-    } else if (a[1] == 'd') {
-        res.header("Content-Type", "text/html");
-        res.send('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><script defer="defer" src="/content/other/face-api.min.js"></script><script defer="defer" src="/content/other/script.js"></script><title>Face Recognition</title><style>body{margin:0;padding:0;width:100vw;height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column}canvas{position:absolute;top:0;left:0}</style></head><body><input type="file" id="imageUpload"></body></html>');
-    } else if(a[1]=='app.js'){
+    if (a[1] == 'favicon.ico') {
+        res.header('Content-Type', 'image/x-icon');
+        res.send(fs.readFileSync(env.rootpath + '/host/img/favicon.ico'));
+    } else if (a[1] == 'app.js') {
         res.header("Content-Type", "application/javascript");
         p = 'sitename="' + env.sitename + '";';
         var ptime = new Date();
         ptime = new Date(ptime.getTime() + (330 + ptime.getTimezoneOffset()) * 60000);
-        const formatMap = { mm: ptime.getMonth() + 1, dd: ptime.getDate(), yyyy: ptime.getFullYear(), d: ptime.getDay(),h: ptime.getHours(), m: ptime.getMinutes()};
-        p+='cltime=`' + JSON.stringify(formatMap) + '`;';
-        p+='siteurl="'+env.siteurl+'";';
-        p+='isssl="'+env.isssl+'";';
-        p+='webdarkcss=`'+fs.readFileSync(env.rootpath+'/host/css/webdark.css')+'`;';
-        p+='weblightcss=`'+fs.readFileSync(env.rootpath+'/host/css/weblight.css')+'`;';
+        const formatMap = { mm: ptime.getMonth() + 1, dd: ptime.getDate(), yyyy: ptime.getFullYear(), d: ptime.getDay(), h: ptime.getHours(), m: ptime.getMinutes() };
+        p += 'cltime=`' + JSON.stringify(formatMap) + '`;';
+        p += 'siteurl="' + env.siteurl + '";';
+        p += 'isssl="' + env.isssl + '";';
+        p += 'webdarkcss=`' + fs.readFileSync(env.rootpath + '/host/css/webdark.css') + '`;';
+        p += 'weblightcss=`' + fs.readFileSync(env.rootpath + '/host/css/weblight.css') + '`;';
         p += 'webcss=`' + fs.readFileSync(env.rootpath + '/host/css/web.css') + '`;';
         p += 'inhtml=`' + fs.readFileSync(env.rootpath + '/host/html/inner.html') + '`;';
         reqip = req.header('x-forwarded-for') || req.socket.remoteAddress;
-        p += 'reqip="' + reqip +'";';
-        p+=fs.readFileSync(env.rootpath+'/host/js/cbor.js');
-        p+=fs.readFileSync(env.rootpath+'/host/js/app.js');
+        p += 'reqip="' + reqip + '";';
+        p += fs.readFileSync(env.rootpath + '/host/js/cbor.js');
+        p += fs.readFileSync(env.rootpath + '/host/js/app.js');
         res.send(p);
     } else if (a[1] == 'manifest.json') {
         res.header("Content-Type", "application/json");
@@ -71,7 +68,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         } catch (e) {
             res.redirect('/');
         }
-    } else if(a[1]=='sys' && (a[2]=='cron' || a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
+    } else if (a[1] == 'sys' && ((a[2] == 'faceapi' && (a[3] == '1' || a[3] == '2'))  || a[2]=='cron' || a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
         if(a[2]=='acchandler'){
             mod.acchandler(req,res,path,port,os,fs,env);
         } else if (a[2] == 'cron') { 
@@ -92,6 +89,13 @@ async function apphandle(req, res, path, port, os, fs, env) {
             mod.minify(all,env,res);
             // res.header("Content-Type", "application/javascript");
             // res.send('{"status":"ok","msg":"ok"}');
+        } else if (a[2] == 'faceapi') {
+            try {
+                t1 = jwt.verify(req.cookies.accheader + '.' + req.cookies.accdata + '.' + req.cookies.acckey, env.jwtk);
+                mod.getimg(t1,a[3],res,env)
+            } catch (e) {
+                res.redirect('/');
+            }
         }
     } else{
         res.header("Content-Type", "text/html");

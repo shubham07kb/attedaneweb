@@ -41,7 +41,10 @@ function loadLabeledImages() {
     labels.map(async label => {
       const descriptions = []
       for (let i = 1; i <= 2; i++) {
-        const img = await faceapi.fetchImage(`/content/other/${label}/${i}.jpg`)
+        const imgd = await fetch(`/others/${label}/${i}.txt`).then(response=>response.text());
+        const base64Data = imgd.replace(/^data:image\/jpeg;base64,/, '');
+        img = Buffer.from(p, "base64");
+        img = await faceapi.fetchImage(img);
         const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
         descriptions.push(detections.descriptor)
       }
