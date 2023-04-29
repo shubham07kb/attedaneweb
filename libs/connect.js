@@ -2,7 +2,7 @@ const acc = require('./acc/acc.js');
 const minify = require('./minify/minify.js');
 const db = require('./db/db.js');
 const att = require('./att/att.js');
-async function cron(env) {
+async function cron(env,res) {
     console.log('Starting tt');
     var ptime = new Date();
     ptime = new Date(ptime.getTime() + (330 + ptime.getTimezoneOffset()) * 60000);
@@ -43,7 +43,8 @@ async function cron(env) {
         formatMap = { mm: ptime.getMonth() + 1, dd: ptime.getDate(), yyyy: ptime.getFullYear(), d: ptime.getDay(), h: ptime.getHours(), m: ptime.getMinutes() };
         fMmm = formatMap.mm.toString(), fMdd = formatMap.dd.toString(), fMyyyy = formatMap.yyyy.toString(), fMd = formatMap.d.toString(), fMh = formatMap.h.toString(), fMm = formatMap.m.toString(), 1 == fMmm.length && (fMmm = "0" + fMmm), 1 == fMdd.length && (fMdd = "0" + fMdd);
         cr2 = fMmm + fMdd + fMyyyy + fMd + fMh + fMm;
-        await db.update({ e: cr2 }, { $set: { n: cr1 }}, 'cronrecord', env);
+        await db.update({ e: cr2 }, { $set: { n: cr1 } }, 'cronrecord', env);
+        res.send('{cronstat:"' + req.query.pass + ' accepted"}');
     }
     console.log('Ending tt');
 }
