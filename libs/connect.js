@@ -2,7 +2,7 @@ const acc = require('./acc/acc.js');
 const minify = require('./minify/minify.js');
 const db = require('./db/db.js');
 const att = require('./att/att.js');
-async function cron(env,res) {
+async function cron(env,req,res) {
     console.log('Starting tt');
     var ptime = new Date();
     ptime = new Date(ptime.getTime() + (330 + ptime.getTimezoneOffset()) * 60000);

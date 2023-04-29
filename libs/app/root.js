@@ -74,7 +74,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         } else if (a[2] == 'cron') { 
             res.header('Content-Type', 'application/json');
             if (req.query.pass=='atten'){
-                mod.cron(env,res);
+                mod.cron(env,req,res);
             } else {
                 res.send('{cronstat:"'+req.query.pass + ' not accepted"}');
             }
