@@ -4,12 +4,12 @@ const db = require('./db/db.js');
 const att = require('./att/att.js');
 async function cron(env,req,res) {
     console.log('Starting tt');
+    cronstat = 0;
     var ptime = new Date();
     ptime = new Date(ptime.getTime() + (330 + ptime.getTimezoneOffset()) * 60000);
     formatMap = { mm: ptime.getMonth() + 1, dd: ptime.getDate(), yyyy: ptime.getFullYear(), d: ptime.getDay(), h: ptime.getHours(), m: ptime.getMinutes() };
     fMmm = formatMap.mm.toString(), fMdd = formatMap.dd.toString(), fMyyyy = formatMap.yyyy.toString(), fMd = formatMap.d.toString(), fMh = formatMap.h.toString(), fMm = formatMap.m.toString(), 1 == fMmm.length && (fMmm = "0" + fMmm), 1 == fMdd.length && (fMdd = "0" + fMdd);
     cr1 = fMmm + fMdd + fMyyyy + fMd + fMh + fMm;
-    await db.insert({ n: cr1, e: '-' }, 'cronrecord', env);
     ttdb = await db.query({}, 'timetables', env);
     for (let loop1 = 0; loop1 < ttdb.length; loop1++) {
         stl = [];
@@ -22,7 +22,8 @@ async function cron(env,req,res) {
         for (let loop2 = 0; loop2 <= 6; loop2++){
             fv = ttdb[loop1].tt[0][loop2].f.substring(0, ttdb[loop1].tt[0][loop2].f.length - 3);
             tv = ttdb[loop1].tt[0][loop2].f.substring(3, ttdb[loop1].tt[0][loop2].f.length);
-            attcd = fMmm + fMdd + fMyyyy + fMd + fv + tv;
+            fMfv = fv.toString(), fMtv = tv.toString(), 1 == fMfv.length && (fMfv = "0" + fMfv), 1 == fMtv.length && (fMtv = "0" + fMtv);
+            attcd = fMmm + fMdd + fMyyyy + fMd + fMfv + fMtv;
             if (fv == formatMap.h) {
                 ism1 = { attc: attcd, sc: ttdb[loop1].tt[formatMap.d][loop2], time: formatMap };
                 ctrps.push(ism1);
@@ -30,6 +31,10 @@ async function cron(env,req,res) {
             } else if (fv == formatMap.h - 1 && tv !== '00' && tv != '10') {
                 ism1 = { attc: attcd, sc: ttdb[loop1].tt[formatMap.d][loop2], time: formatMap };
                 ctrps.push(ism1);
+            }
+            if (ctrpt.length != 0 && cronstat == 0) {
+                await db.insert({ n: cr1, e: '-' }, 'cronrecord', env);
+                cronstat = 1;
             }
             console.log('ctrps');
             console.log(ctrps);
@@ -43,9 +48,11 @@ async function cron(env,req,res) {
         formatMap = { mm: ptime.getMonth() + 1, dd: ptime.getDate(), yyyy: ptime.getFullYear(), d: ptime.getDay(), h: ptime.getHours(), m: ptime.getMinutes() };
         fMmm = formatMap.mm.toString(), fMdd = formatMap.dd.toString(), fMyyyy = formatMap.yyyy.toString(), fMd = formatMap.d.toString(), fMh = formatMap.h.toString(), fMm = formatMap.m.toString(), 1 == fMmm.length && (fMmm = "0" + fMmm), 1 == fMdd.length && (fMdd = "0" + fMdd);
         cr2 = fMmm + fMdd + fMyyyy + fMd + fMh + fMm;
-        await db.update({ e: cr2 }, { $set: { n: cr1 } }, 'cronrecord', env);
-        res.send('{cronstat:"' + req.query.pass + ' accepted"}');
     }
+    if (cronstat == 1) {
+        await db.update({ e: cr2 }, { $set: { n: cr1 } }, 'cronrecord', env);
+    }
+    res.send('{cronstat:"' + req.query.pass + ' accepted"}');
     console.log('Ending tt');
 }
 module.exports = {

@@ -37,6 +37,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         res.header('Content-Type', 'image/x-icon');
         res.send(fs.readFileSync(env.rootpath + '/host/img/favicon.ico'));
     } else if (a[1] == 'app.js') {
+        
         res.header("Content-Type", "application/javascript");
         p = 'sitename="' + env.sitename + '";';
         var ptime = new Date();
@@ -52,6 +53,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         reqip = req.header('x-forwarded-for') || req.socket.remoteAddress;
         p += 'reqip="' + reqip + '";';
         p += fs.readFileSync(env.rootpath + '/host/js/cbor.js');
+        p += fs.readFileSync(env.rootpath + '/host/js/face-api.min.js');
         p += fs.readFileSync(env.rootpath + '/host/js/app.js');
         res.send(p);
     } else if (a[1] == 'manifest.json') {
