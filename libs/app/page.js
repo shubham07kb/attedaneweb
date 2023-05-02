@@ -62,11 +62,57 @@ async function pin(a, req, res, t1, env, path, os, fs, port) {
         <h4><b>Address</b>: `+ t1.adr + `</h4>
         <h4><b>Type of Profile</b>:`+ sta +`</h4>`;
         res.send(resend);
+    } else if (a[2] =='applyatt') {
+        if (t1.at == 's') {
+            var ptime = new Date();
+            ptime = new Date(ptime.getTime() + (330 + ptime.getTimezoneOffset()) * 60000);
+            formatMap = { mm: ptime.getMonth() + 1, dd: ptime.getDate(), yyyy: ptime.getFullYear(), d: ptime.getDay(), h: ptime.getHours(), m: ptime.getMinutes() };
+            pcv = (formatMap.h * 60) + formatMap.m;
+            r = await db.query({ branch: t1.uid.substring(0, t1.uid.length - 2) }, 'stuattenactive', env);
+            pp = [];
+            if (r.length == 1) { 
+                r.forEach(element => {
+                    element.atten.forEach(element1 => {
+                        fv = Number(element1.p.fv);
+                        tv = Number(element1.p.tv);
+                        cv = (fv * 60) + tv;
+                        rcv = pcv - cv;
+                        if (rcv >= 0 && rcv < 40) {
+                            pp.push(element1);
+                        }
+                    });
+                });
+            }
+            ress = '<h1 style="text-align:center;">Apply Attendance Page</h1><br>';
+            if (pp.length == 1) {
+                pp = pp[0];
+                r = await db.query({ uid: t1.uid }, 'stuatten', env);
+                console.log(pp)
+                console.log(r[0].atten)
+                if (r[0].atten.includes(pp.atten)) {
+                    console.log('Already Applied');
+                    ress += `Current Active Period: ` + pp.sc + `<br> Status: Marked Present`;
+                } else {
+                    console.log('Not Applied');
+                    ress += `Current Active Period: ` + pp.sc + `<br> Status: Absent <br>`;
+                    ress += `<div id='attensubid' style="display:none;">` + pp.atten + `</div>`;
+                    ress += `<div id="attenapplybg"><button onclick="applyattencur()" style="background-color: #4CAF50;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer;">Apply</button></div>`;
+                }
+                // ress = ``;
+            } else {
+                ress+= `<h1>No Current Lecture Found</h1>`;
+            }
+            res.send(ress);
+        }
     } else if (a[2] == 'meta') {
         if (a[3]=='timetable') {
             res.send('working yo');
         } else if (a[3] == 'profile') {
             res.send('working yo');
+        } else if (a[3] == 'applyatt') {
+            res.send('working yo');
+        } else {
+            res.send('page not found');
         }
     } else {
         res.send('page not found');

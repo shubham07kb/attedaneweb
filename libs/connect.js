@@ -28,13 +28,13 @@ async function cron(env,req,res) {
             fMfv = fv.toString(), fMtv = tv.toString(), 1 == fMfv.length && (fMfv = "0" + fMfv), 1 == fMtv.length && (fMtv = "0" + fMtv);
             attcd = fMmm + fMdd + fMyyyy + fMd + fMfv + fMtv;
             if (fv == formatMap.h) {
-                ism1 = { attc: attcd, sc: ttdb[loop1].tt[formatMap.d][loop2].sub, time: formatMap };
+                ism1 = { attc: attcd, sc: ttdb[loop1].tt[formatMap.d][loop2].sub, time: formatMap, p: { fv: fv, tv: tv } };
                 ctrps.push(ism1);
                 ctrpt.push(ism1);
                 active1.push(ttdb[loop1].tt[formatMap.d][loop2].sub);
                 intive1.push(ttdb[loop1].tt[formatMap.d][loop2].sub);
             } else if (fv == formatMap.h - 1 && tv !== '00' && tv != '10') {
-                ism1 = { attc: attcd, sc: ttdb[loop1].tt[formatMap.d][loop2], time: formatMap };
+                ism1 = { attc: attcd, sc: ttdb[loop1].tt[formatMap.d][loop2].sub, time: formatMap, p: { fv: fv, tv: tv } };
                 ctrps.push(ism1);
                 active1.push(ttdb[loop1].tt[formatMap.d][loop2].sub);
             }
