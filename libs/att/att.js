@@ -1,4 +1,4 @@
-const db=require('../db/db.js');
+const db = require('../db/db.js');
 async function getimg(t1, imgn, res, env) {
     r = await db.query({ uid: t1.uid }, 'stuimg', env);
     if (r.length == 1) { 
@@ -10,6 +10,9 @@ async function getimg(t1, imgn, res, env) {
         res.header('Content-Type', 'application/json');
         res.send('{error: "failed, No img found"}');
     }
+}
+function applyatten(){
+    
 }
 module.exports = {
     getimg: getimg

@@ -2,6 +2,7 @@ const { endsWith } = require('lodash');
 const mod = require('../connect');
 const page = require('./page');
 const jwt = require("jsonwebtoken");
+const crypto = require('crypto');
 async function getfiles(fs, f) {
     d=[]
     e = fs.readdirSync(f);
@@ -37,7 +38,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         res.header('Content-Type', 'image/x-icon');
         res.send(fs.readFileSync(env.rootpath + '/host/img/favicon.ico'));
     } else if (a[1] == 'app.js') {
-        
+
         res.header("Content-Type", "application/javascript");
         p = 'sitename="' + env.sitename + '";';
         var ptime = new Date();
@@ -70,7 +71,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         } catch (e) {
             res.redirect('/');
         }
-    } else if (a[1] == 'sys' && ((a[2] == 'faceapi' && (a[3] == '1' || a[3] == '2'))  || a[2]=='cron' || a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
+    } else if (a[1] == 'sys' && ((a[2] == 'faceapi' && (a[3] == '1' || a[3] == '2')) || (a[2]=='sec' && (a[3]=='crypto'))  || a[2]=='cron' || a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
         if(a[2]=='acchandler'){
             mod.acchandler(req,res,path,port,os,fs,env);
         } else if (a[2] == 'cron') { 
@@ -96,6 +97,11 @@ async function apphandle(req, res, path, port, os, fs, env) {
                 mod.getimg(t1, a[3], res, env);
             } catch (e) {
                 res.redirect('/');
+            }
+        } else if (a[2] == 'sec') {
+            if (a[3] == 'crypto') { 
+                const challenge = crypto.randomBytes(16).toString('hex');
+                res.send(challenge);
             }
         }
     } else{
