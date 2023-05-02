@@ -176,7 +176,7 @@ async function callpage() {
         applytheme();
         if (udata.urlpna[0] == '' || udata.urlpna[0] == 'home') {
             
-        } else if (udata.urlpna[0] == 'attendance') {
+        } else if (udata.urlpna[0] == 'attendance' || (udata.urlpna[0] == 'attendance' && udata.urlpna[1]=='apply')) {
 
         } else if (udata.urlpna[0] == 'createattendance') {
 

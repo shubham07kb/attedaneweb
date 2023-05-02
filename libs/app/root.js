@@ -71,7 +71,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         } catch (e) {
             res.redirect('/');
         }
-    } else if (a[1] == 'sys' && ((a[2] == 'faceapi' && (a[3] == '1' || a[3] == '2')) || (a[2]=='sec' && (a[3]=='crypto'))  || a[2]=='cron' || a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
+    } else if (a[1] == 'sys' && ((a[2] == 'isproxy' && (a[3] != undefined && a[3]!='')) || (a[2] == 'faceapi' && (a[3] == '1' || a[3] == '2')) || (a[2]=='sec' && (a[3]=='crypto'))  || a[2]=='cron' || a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
         if(a[2]=='acchandler'){
             mod.acchandler(req,res,path,port,os,fs,env);
         } else if (a[2] == 'cron') { 

@@ -5,6 +5,7 @@ const att = require('./att/att.js');
 async function cron(env,req,res) {
     console.log('Starting tt');
     cronstat = 0;
+    cronp = [];
     var ptime = new Date();
     ptime = new Date(ptime.getTime() + (330 + ptime.getTimezoneOffset()) * 60000);
     formatMap = { mm: ptime.getMonth() + 1, dd: ptime.getDate(), yyyy: ptime.getFullYear(), d: ptime.getDay(), h: ptime.getHours(), m: ptime.getMinutes() };
@@ -40,7 +41,6 @@ async function cron(env,req,res) {
             if (ctrpt.length != 0 && cronstat == 0) {
                 await db.insert({ n: cr1, e: '-' }, 'cronrecord', env);
                 cronstat = 1;
-                cronp = [];
             }
             console.log('ctrps');
             console.log(ctrps);
