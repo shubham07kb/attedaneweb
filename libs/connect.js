@@ -8,8 +8,8 @@ async function cron(env,req,res) {
     var ptime = new Date();
     ptime = new Date(ptime.getTime() + (330 + ptime.getTimezoneOffset()) * 60000);
     formatMap = { mm: ptime.getMonth() + 1, dd: ptime.getDate(), yyyy: ptime.getFullYear(), d: ptime.getDay(), h: ptime.getHours(), m: ptime.getMinutes() };
-    fMmm = formatMap.mm.toString(), fMdd = formatMap.dd.toString(), fMyyyy = formatMap.yyyy.toString(), fMd = formatMap.d.toString(), fMh = formatMap.h.toString(), fMm = formatMap.m.toString(), 1 == fMmm.length && (fMmm = "0" + fMmm), 1 == fMdd.length && (fMdd = "0" + fMdd), 1 == fMh.length && (fMh = "0" + fMh), 1 == fMm.length && (fMm = "0" + fMm);
-    cr1 = fMmm + fMdd + fMyyyy + fMd + fMh + fMm;
+    fMs = ptime.getSeconds().toString(), fMmm = formatMap.mm.toString(), fMdd = formatMap.dd.toString(), fMyyyy = formatMap.yyyy.toString(), fMd = formatMap.d.toString(), fMh = formatMap.h.toString(), fMm = formatMap.m.toString(), 1 == fMmm.length && (fMmm = "0" + fMmm), 1 == fMdd.length && (fMdd = "0" + fMdd), 1 == fMh.length && (fMh = "0" + fMh), 1 == fMm.length && (fMm = "0" + fMm);
+    cr1 = fMmm + fMdd + fMyyyy + fMd + fMh + fMm + fMs;
     ttdb = await db.query({}, 'timetables', env);
     for (let loop1 = 0; loop1 < ttdb.length; loop1++) {
         stl = [];
@@ -55,8 +55,8 @@ async function cron(env,req,res) {
     if (cronstat == 1) {
         ptime = new Date(ptime.getTime() + (330 + ptime.getTimezoneOffset()) * 60000);
         formatMap = { mm: ptime.getMonth() + 1, dd: ptime.getDate(), yyyy: ptime.getFullYear(), d: ptime.getDay(), h: ptime.getHours(), m: ptime.getMinutes() };
-        fMmm = formatMap.mm.toString(), fMdd = formatMap.dd.toString(), fMyyyy = formatMap.yyyy.toString(), fMd = formatMap.d.toString(), fMh = formatMap.h.toString(), fMm = formatMap.m.toString(), 1 == fMmm.length && (fMmm = "0" + fMmm), 1 == fMdd.length && (fMdd = "0" + fMdd), 1 == fMh.length && (fMh = "0" + fMh), 1 == fMm.length && (fMm = "0" + fMm);
-        cr2 = fMmm + fMdd + fMyyyy + fMd + fMh + fMm;
+        fMs = ptime.getSeconds().toString(), fMmm = formatMap.mm.toString(), fMdd = formatMap.dd.toString(), fMyyyy = formatMap.yyyy.toString(), fMd = formatMap.d.toString(), fMh = formatMap.h.toString(), fMm = formatMap.m.toString(), 1 == fMmm.length && (fMmm = "0" + fMmm), 1 == fMdd.length && (fMdd = "0" + fMdd), 1 == fMh.length && (fMh = "0" + fMh), 1 == fMm.length && (fMm = "0" + fMm);
+        cr2 = fMmm + fMdd + fMyyyy + fMd + fMh + fMm + fMs;
         await db.update({ $set: { e: cr2, cronrun:cronp } }, { n: cr1 }, 'cronrecord', env);
     }
     res.send('{cronstat:"' + req.query.pass + ' accepted"}');
