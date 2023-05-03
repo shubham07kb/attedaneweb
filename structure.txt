@@ -1,0 +1,20 @@
+D:.
+├───.vscode
+├───host
+│   ├───css
+│   ├───html
+│   │   ├───a
+│   │   ├───s
+│   │   └───t
+│   ├───img
+│   ├───js
+│   ├───json
+│   └───other
+│       ├───models
+│       └───others
+├───libs
+    ├───acc
+    ├───app
+    ├───att
+    ├───db
+    └───minify

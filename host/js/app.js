@@ -287,7 +287,7 @@ async function callpage() {
         gebi('content').innerHTML = 'Loading...';
         applytheme();
         if (udata.urlpna[0] == '' || udata.urlpna[0] == 'home') {
-            gebi('content').innerHTML = `<a onclick="psi('/attendance/apply')">Attendance Apply</a><br><a onclick="psi('/timetable')">TimeTable</a><br><a onclick="psi('/attendance')">Attendance</a><a onclick="psi('/profile')">Profile</a>`;
+            gebi('content').innerHTML = `<a onclick="psi('/attendance/apply')">Attendance Apply</a><br><a onclick="psi('/timetable')">TimeTable</a><br><a onclick="psi('/attendance')">Attendance</a><br><a onclick="psi('/profile')">Profile</a>`;
         } else if(udata.urlpna[0] == 'attendance' && udata.urlpna[1] == 'apply') {
             if (udata.urlpna[1] == 'apply') {
                 propagereq('applyatt');
