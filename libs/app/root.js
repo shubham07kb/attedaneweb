@@ -56,7 +56,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         p += fs.readFileSync(env.rootpath + '/host/js/cbor.min.js');
         p += fs.readFileSync(env.rootpath + '/host/js/face-api.min.js');
         p += fs.readFileSync(env.rootpath + '/host/js/chart.min.js');
-        p += fs.readFileSync(env.rootpath + '/host/js/app.js');
+        p += fs.readFileSync(env.rootpath + '/host/js/app.min.js');
         res.send(p);
     } else if (a[1] == 'manifest.json') {
         res.header("Content-Type", "application/json");
