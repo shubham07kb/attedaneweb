@@ -11,9 +11,16 @@ async function getimg(t1, imgn, res, env) {
         res.send('{error: "failed, No img found"}');
     }
 }
-function applyatten(){
+async function applyatten(attc, res, t1, env) {
+    try {
+        await db.update({ $push: { atten: attc } }, { uid: t1.uid }, 'stuatten', env);
+        res.send('{"stat":1,"r":"Applied"}');
+    } catch (e) {
+        res.send('{"stat":1,"r":"DB error"}');
+    }
     
 }
 module.exports = {
-    getimg: getimg
+    getimg: getimg,
+    applyatten: applyatten
 }

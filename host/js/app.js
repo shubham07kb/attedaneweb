@@ -8,6 +8,7 @@ class account {
     }
 }
 glovar1 = '';
+streamstore = '';
 logpagecss = `@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); body{ margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; } :root{ --corprincipal: #000; --cinza: #D6D6D6; --branco: #FFF; --preto: #000; } .flex{ justify-content: space-between; display: flex; } #telalogin{ background: linear-gradient(-45deg, #0000FF, #0096FF, #00FFFF); animation: gradient 15s ease infinite; background-size: 400% 400%; justify-content: center; flex-direction: column; align-items: center; display: flex; text-align: center; height: 100vh; transition: 0.3s; } @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } } .container-fundo{ box-shadow: 0px 11px 34px #00000033; background-color: var(--branco); box-sizing: border-box; border-radius: 15px; max-width: 450px; padding: 50px; height: auto; width: 100%; } #logo-cliente img{ max-width: 200px; width: 100%; } .container-logins{ padding: 25px 0px; max-width: 440px; margin: auto; } .container-logins .login input{ border: 1px solid var(--cinza); box-sizing: border-box; margin: 5px 0 15px 0; color: var(--preto); border-radius: 6px; font-size: 16px; padding: 10px; height: 44px; width: 100%; transition: 0.3s; } .container-logins .login input::placeholder{ color: var(--cinza); } .container-logins .login input:focus-visible{ outline: 1px solid var(--corprincipal); border: 1px solid var(--corprincipal); } .container-logins .login p{ font-size: 14px; opacity: 0.6; margin: 0; } .container-logins .botao-login{ background-color: var(--branco); border: 1px solid var(--cinza); border-radius: 6px; margin-top: 30px; font-size: 16px; cursor: pointer; width: 150px; height: 45px; transition: 0.3s; } .container-logins .botao-login:hover{ background-color: var(--corprincipal); border: 1px solid var(--corprincipal); color: var(--branco); } .authenticate{ box-shadow: 0px 11px 34px #0000001a; background-color: var(--branco); border-radius: 10px; width: fit-content; padding: 10px 5px; margin: 20px auto; display: flex; } .authenticate svg{ margin: 5px 10px 0; cursor: pointer; width: 25px; } #logo-empresa{ width: 100%; } #logo-empresa img{ max-width: 100px; } @media screen and (max-width: 500px) { .container-fundo { max-width: 350px; padding: 35px; } } .ph:hover{color:blue;} .err{color:red;}`;
 fingerprinticon = `<svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M123 472q-4-2-4-6.5t2-8.5q62-86 157-133t203-47q108 0 203.5 46T843 455q3 5 2.5 8t-3.5 6q-3 3-7.5 3t-8.5-5q-59-82-150.5-126T481 297q-103 0-193 44.5T138 467q-4 5-7.5 6t-7.5-1Zm477 503q-103-26-169.5-103T364 685q0-47 34.5-79t82.5-32q48 0 82.5 32t34.5 79q0 38 29.5 64t68.5 26q38 0 66.5-26t28.5-64q0-123-91.5-206T481 396q-127 0-218.5 83T171 685q0 24 5.5 62.5T200 835q2 5 0 7.5t-5 4.5q-4 2-8.5 1t-6.5-6q-13-38-20.5-77.5T152 685q0-129 98-220.5T481 373q136 0 233.5 90T812 685q0 46-34 78t-82 32q-49 0-84-32t-35-78q0-39-28.5-65T481 594q-39 0-68 26t-29 65q0 104 63 173.5T604 956q6 2 7.5 5t.5 7q-1 5-4 7t-8 0ZM247 255q-5 2-7.5.5T235 251q-2-2-2-6t3-6q57-31 119.5-47T481 176q65 0 127.5 16T728 237q5 2 5.5 6t-1.5 7q-2 3-5.5 5t-8.5 0q-55-27-115-42.5T481 197q-62 0-121 14.5T247 255Zm134 709q-58-60-90.5-126T258 685q0-89 65.5-150T481 474q92 0 158.5 61T706 685q0 5-2.5 7.5T696 695q-5 0-8-2.5t-3-7.5q0-81-60.5-136T481 494q-83 0-142.5 55T279 685q0 85 29.5 145T396 950q4 4 3.5 7.5T396 964q-2 2-6.5 3.5T381 964Zm306-73q-88 0-152.5-58.5T470 685q0-5 2.5-8t7.5-3q5 0 7.5 3t2.5 8q0 81 59.5 133.5T687 871q8 0 19-1t24-3q5-1 8 1.5t4 5.5q1 4-.5 7t-6.5 4q-18 5-31.5 5.5t-16.5.5Z"/></svg>`;
 async function presetup() {
@@ -176,7 +177,8 @@ async function applyattencur() {
 async function startattcam() {
     let mediaDevices = navigator.mediaDevices;
     let video = document.getElementById("vidatt");
-    mediaDevices.getUserMedia({video: true,audio: true,}).then((stream) => {
+    mediaDevices.getUserMedia({ video: true, audio: false, }).then((stream) => {
+        streamstore = stream;
         video.srcObject = stream;
         video.addEventListener("loadedmetadata", () => {
             video.play();
@@ -198,6 +200,12 @@ async function startattcam() {
         alert("err: Geolocation not supported by the browser" );
     }
 }
+function stopCamera() {
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop()); // stop all tracks in the stream
+        stream = null; // clear the reference to the stream object
+    }
+}
 function locrunneddatt(p) {
     glovar1 = p;
     gebi("camloadedatt").innerHTML = `<button onclick="runattcap()" style="background-color: #4CAF50;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer;">Snap</button></div><canvas id="canvas" width="320" height="240"></canvas>`;
@@ -207,6 +215,7 @@ async function runattcap() {
     video = gebi("vidatt");
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
     let base64Image = canvas.toDataURL('image/jpeg');
+    stopCamera();
     const image = new Image();
     image.src = base64Image;
     const labeledFaceDescriptors = await loadLabeledImages();
@@ -224,7 +233,31 @@ async function runattcap() {
         }
     });
     if (ivm == 1) {
-        xhratt= new XMLHttpRequest
+        xhttp = new XMLHttpRequest();
+        xhttp.open("POST", '/sys/sec/crypto/foratt', true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let res = JSON.parse(this.responseText);
+                xhttpn = new XMLHttpRequest();
+                xhttp.open("POST", '/sys/attenapply/' + res.url, true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) { 
+                        res1 = JSON.parse(this.responseText);
+                        if (res1.stat == 1) {
+                            psi('/attendance/apply');
+                        } else {
+                            alert("Error: " + res1.error);
+                        }
+                    }
+                }
+                attc=gebi("attensubid").innerHTML;
+                xhttp.send('challange=' + res.challange+'&attc=' + attc);
+            }
+        };
+        console.log(glovar1);
+        xhttp.send('lat' + glovar1.lat.toString()+'&lon' + glovar1.lon.toString());
     } else {
         alert('Face Not Match');
     }
@@ -254,11 +287,13 @@ async function callpage() {
         gebi('content').innerHTML = 'Loading...';
         applytheme();
         if (udata.urlpna[0] == '' || udata.urlpna[0] == 'home') {
-            
-        } else if (udata.urlpna[0] == 'attendance' || (udata.urlpna[0] == 'attendance' && udata.urlpna[1] == 'apply')) {
+            gebi('content').innerHTML = `<a onclick="psi('/attendance/apply')">Attendance Apply</a><br><a onclick="psi('/timetable')">TimeTable</a><br><a onclick="psi('/attendance')">Attendance</a><a onclick="psi('/profile')">Profile</a>`;
+        } else if(udata.urlpna[0] == 'attendance' && udata.urlpna[1] == 'apply') {
             if (udata.urlpna[1] == 'apply') {
                 propagereq('applyatt');
             }
+        } else if (udata.urlpna[0] == 'attendance') {
+            propagereq('attendance');
         } else if (udata.urlpna[0] == 'createattendance') {
 
         } else if (udata.urlpna[0] == 'createacc') {
@@ -279,13 +314,6 @@ async function callpage() {
 
         }
     }
-    // const successCallback = async (position) =>  {
-    // };
-    // const errorCallback = (error) => {
-    //     gebi('style').innerHTML=logpagecss;
-    //     gebi('main').innerHTML=`<div id="telalogin"><div class="container-fundo"><div id="logo-cliente"><h1>CU</h1></div><div class="container-logins"><h2>Allow Location Permisson</h2><div class="login"><button class="botao-login" onClick="ps('/');setls('isWebAuthnActive',1,);callpage()">Check</button></div></div></div></div>`;
-    // }; 
-    // navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 }
 async function pageload() {
 
@@ -316,9 +344,9 @@ async function propagereq(n) {
     onRequestsComplete([xhrp, xhrd], function (requests, unsuccessful) { 
         if (unsuccessful) {
             return;
-        } else {
-            gebi('content').innerHTML = requests[0].responseText;
         }
+        gebi('content').innerHTML = requests[0].responseText;
+        eval(requests[1].responseText);
     });
     xhrp.open("GET", "/sp/"+n, true);
     xhrd.open("GET", "/sp/meta/"+n, true);

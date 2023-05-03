@@ -67,5 +67,6 @@ module.exports = {
     acchandler: acc.acchandler,
     minify: minify.minify,
     cron: cron,
-    getimg: att.getimg
+    getimg: att.getimg,
+    applyatten: att.applyatten
 }

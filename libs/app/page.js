@@ -37,7 +37,7 @@ async function pin(a, req, res, t1, env, path, os, fs, port) {
                     }
                     resend += `</tr>`;
                 }
-                resend += `</table>`;
+                resend += `</table><br><br><a onclick="psi('/attendance/apply')">Attendance Apply</a>`;
                 res.send(resend);
             } else {
                 res.send('No timetable found for ' + t1.uid);
@@ -77,7 +77,7 @@ async function pin(a, req, res, t1, env, path, os, fs, port) {
                         tv = Number(element1.p.tv);
                         cv = (fv * 60) + tv;
                         rcv = pcv - cv;
-                        if (rcv >= 0 && rcv < 40) {
+                        if (rcv >= 0 && rcv < 50) {
                             pp.push(element1);
                         }
                     });
@@ -87,35 +87,72 @@ async function pin(a, req, res, t1, env, path, os, fs, port) {
             if (pp.length == 1) {
                 pp = pp[0];
                 r = await db.query({ uid: t1.uid }, 'stuatten', env);
-                console.log(pp)
-                console.log(r[0].atten)
-                if (r[0].atten.includes(pp.atten)) {
-                    console.log('Already Applied');
+                console.log(r[0].atten);
+                console.log(pp.attc);
+                if (r[0].atten.includes(pp.attc)) {
                     ress += `Current Active Period: ` + pp.sc + `<br> Status: Marked Present`;
                 } else {
-                    console.log('Not Applied');
                     ress += `Current Active Period: ` + pp.sc + `<br> Status: Absent <br>`;
-                    ress += `<div id='attensubid' style="display:none;">` + pp.atten + `</div>`;
+                    ress += `<div id='attensubid' style="display:none;">` + pp.attc + `</div>`;
                     ress += `<div id="attenapplybg"><button onclick="applyattencur()" style="background-color: #4CAF50;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer;">Apply</button></div>`;
                 }
-                // ress = ``;
             } else {
                 ress+= `<h1>No Current Lecture Found</h1>`;
             }
             res.send(ress);
         }
+    } else if (a[2] == 'attendance') {
+        if (t1.at == 's') { 
+            r = await db.query({ branch: t1.uid.substring(0, t1.uid.length - 2) }, 'stuattenintive', env);
+            j = await db.query({ uid: t1.uid }, 'stuatten', env);
+            t = await db.query({ branch: t1.uid.substring(0, t1.uid.length - 2) }, 'timetables', env);
+            r = r[0];
+            j = j[0];
+            t = t[0];
+            subal = {};
+            subaln = {};
+            for (const property in t.st) {
+                subal[property] = [];
+                subaln[property] = [];
+            }
+            r.atten.forEach(element => {
+                subal[element.sc].push(element.attc);
+                if (j.atten.includes(element.attc)) {
+                    subaln[element.sc].push(element.attc);
+                }
+            });
+            ress = `<h1 style="text-align:center;">Attendance</h1><br><br><table style="width:100%;border:1px solid blue"><tr style="border:1px solid blue"><th style="border:1px solid blue">Subject</th><th style="border:1px solid blue">Total Lecture</th><th style="border:1px solid blue">Attended</th><th style="border:1px solid blue">Percentage</th><th style="border:1px solid blue">Exam Status</th></tr>`;
+            esr = `<div style="color:red">•</div>`;
+            esg = `<div style="color:green">•</div>`;
+            esn = `<div style="color:gray">•</div>`;
+            for (const property in t.st) {
+                pers = (subaln[property].length / subal[property].length) * 100;
+                if (Number.isNaN(pers)) {
+                    csc = `<div style="color:gray">•</div>`;
+                } else if (pers >= 75) {
+                    csc = `<div style="color:green">•</div>`;
+                } else {
+                    csc = `<div style="color:red">•</div>`;
+                }
+                ress += `<tr style="border:1px solid blue"><td style="border:1px solid blue;text-align:center">` + property + `</td><td style="border:1px solid blue;text-align:center">` + subal[property].length + `</td><td style="border:1px solid blue;text-align:center">` + subaln[property].length + `</td><td style="border:1px solid blue;text-align:center">` + pers + `</td><td style="border:1px solid blue;text-align:center">` + csc + `</td></tr>`;
+            }
+            ress += `</table><br><br><a onclick="psi('/attendance/apply')">Attendance Apply</a>`;
+            res.send(ress);
+        }
     } else if (a[2] == 'meta') {
         if (a[3]=='timetable') {
-            res.send('working yo');
+            res.send('');
         } else if (a[3] == 'profile') {
-            res.send('working yo');
+            res.send('');
         } else if (a[3] == 'applyatt') {
-            res.send('working yo');
+            res.send('');
+        } else if (a[3] == 'attendance') {
+            res.send('');
         } else {
-            res.send('page not found');
+            res.send('');
         }
     } else {
-        res.send('page not found');
+        res.send('');
     }
 }
 module.exports = {

@@ -47,14 +47,15 @@ async function apphandle(req, res, path, port, os, fs, env) {
         p += 'cltime=`' + JSON.stringify(formatMap) + '`;';
         p += 'siteurl="' + env.siteurl + '";';
         p += 'isssl="' + env.isssl + '";';
-        p += 'webdarkcss=`' + fs.readFileSync(env.rootpath + '/host/css/webdark.css') + '`;';
-        p += 'weblightcss=`' + fs.readFileSync(env.rootpath + '/host/css/weblight.css') + '`;';
-        p += 'webcss=`' + fs.readFileSync(env.rootpath + '/host/css/web.css') + '`;';
+        p += 'webdarkcss=`' + fs.readFileSync(env.rootpath + '/host/css/webdark.min.css') + '`;';
+        p += 'weblightcss=`' + fs.readFileSync(env.rootpath + '/host/css/weblight.min.css') + '`;';
+        p += 'webcss=`' + fs.readFileSync(env.rootpath + '/host/css/web.min.css') + '`;';
         p += 'inhtml=`' + fs.readFileSync(env.rootpath + '/host/html/inner.html') + '`;';
         reqip = req.header('x-forwarded-for') || req.socket.remoteAddress;
         p += 'reqip="' + reqip + '";';
-        p += fs.readFileSync(env.rootpath + '/host/js/cbor.js');
+        p += fs.readFileSync(env.rootpath + '/host/js/cbor.min.js');
         p += fs.readFileSync(env.rootpath + '/host/js/face-api.min.js');
+        p += fs.readFileSync(env.rootpath + '/host/js/chart.min.js');
         p += fs.readFileSync(env.rootpath + '/host/js/app.js');
         res.send(p);
     } else if (a[1] == 'manifest.json') {
@@ -62,7 +63,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         res.send(fs.readFileSync(env.rootpath + '/host/json/manifest.json'));
     } else if (a[1] == 'sw.js') {
         res.header("Content-Type", "application/javascript");
-        p = fs.readFileSync(env.rootpath + '/host/js/sw.js');
+        p = fs.readFileSync(env.rootpath + '/host/js/sw.min.js');
         res.send(p);
     } else if (a[1] == 'sp') {
         try {
@@ -71,7 +72,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
         } catch (e) {
             res.redirect('/');
         }
-    } else if (a[1] == 'sys' && ((a[2] == 'isproxy' && (a[3] != undefined && a[3]!='')) || (a[2] == 'faceapi' && (a[3] == '1' || a[3] == '2')) || (a[2]=='sec' && (a[3]=='crypto'))  || a[2]=='cron' || a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
+    } else if (a[1] == 'sys' && ((a[2]=='attenapply' && (a[3]!=undefined && a[3]!='')) || (a[2] == 'isproxy' && (a[3] != undefined && a[3]!='')) || (a[2] == 'faceapi' && (a[3] == '1' || a[3] == '2')) || (a[2]=='sec' && (a[3]=='crypto' && (a[4]=='foratt')))  || a[2]=='cron' || a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
         if(a[2]=='acchandler'){
             mod.acchandler(req,res,path,port,os,fs,env);
         } else if (a[2] == 'cron') { 
@@ -100,13 +101,41 @@ async function apphandle(req, res, path, port, os, fs, env) {
             }
         } else if (a[2] == 'sec') {
             if (a[3] == 'crypto') { 
-                const challenge = crypto.randomBytes(16).toString('hex');
-                res.send(challenge);
+                if (a[4] == 'foratt') {
+                    res.header("Content-Type", "application/json");
+                    console.log('here')
+                    try {
+                        t1 = jwt.verify(req.cookies.accheader + '.' + req.cookies.accdata + '.' + req.cookies.acckey, env.jwtk);
+                        const salt = crypto.randomBytes(16).toString('hex');
+                        const saltedStr = salt + t1.uid;
+                        const hash = crypto.createHash('sha256');
+                        hash.update(saltedStr);
+                        const hashedStr = hash.digest('hex');
+                        res.send('{"stat":1,"url":"' + hashedStr + '","challange":"' + salt + '"}')
+                    } catch (e) {
+                        console.log(e);
+                        res.send('{"stat":0,"error":"session end or error occured"}');
+                    }
+                }
+            }
+        } else if (a[2] == 'attenapply') {
+            try {
+                t1 = jwt.verify(req.cookies.accheader + '.' + req.cookies.accdata + '.' + req.cookies.acckey, env.jwtk);
+                const saltedStr = req.body.challange + t1.uid;
+                const generatedHash = crypto.createHash('sha256').update(saltedStr).digest('hex');
+                if (generatedHash == a[3]) {
+                    mod.applyatten(req.body.attc,res,t1,env);
+                } else {
+                    res.send('{"stat":0,"error":"Challenge failed"}');
+                }
+            } catch (e) {
+                console.log(e);
+                res.send('{"stat":0,"error":"session end or error occured"}');
             }
         }
     } else{
         res.header("Content-Type", "text/html");
-        res.render('index.html',{title:env.sitename});
+        res.render('index.min.html',{title:env.sitename});
     }
 }
 module.exports={
