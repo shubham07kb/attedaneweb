@@ -201,9 +201,9 @@ async function startattcam() {
     }
 }
 function stopCamera() {
-    if (stream) {
-        stream.getTracks().forEach(track => track.stop()); // stop all tracks in the stream
-        stream = null; // clear the reference to the stream object
+    if (streamstore) {
+        streamstore.getTracks().forEach(track => track.stop()); // stop all tracks in the stream
+        streamstore = null; // clear the reference to the stream object
     }
 }
 function locrunneddatt(p) {
