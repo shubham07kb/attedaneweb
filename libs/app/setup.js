@@ -3,7 +3,7 @@ function init(env){
     config=JSON.parse(fs.readFileSync(env.rootpath+'/config.json', 'utf8'));
     if(config.sitename==undefined || config.sitename=='' || config.siteurl==undefined || config.siteurl==''){
         throw('Please set the sitename and siteurl in config.json');
-    } else{
+    } else {
         env.sitename=config.sitename;
         env.siteurl=config.siteurl;
     }

@@ -1,8 +1,8 @@
 {
     "sitename":"CU",
-    "siteurl":"localhost",
-    "server":"localhost",
-    "isssl":false,
+    "siteurl":"attendanceapp.cyclic.app",
+    "server":"attendanceapp.cyclic.app",
+    "isssl":true,
     "db":{
         "s":"mongodb",
         "url":"mongodb+srv://Shubhamkb:Shubhamkb@cudatabase.jejqgjq.mongodb.net/?retryWrites=true&w=majority",
