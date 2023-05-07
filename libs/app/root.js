@@ -72,24 +72,24 @@ async function apphandle(req, res, path, port, os, fs, env) {
         } catch (e) {
             res.redirect('/');
         }
-    } else if (a[1] == 'sys' && ((a[2]=='attenapply' && (a[3]!=undefined && a[3]!='')) || (a[2] == 'isproxy' && (a[3] != undefined && a[3]!='')) || (a[2] == 'faceapi' && (a[3] == '1' || a[3] == '2')) || (a[2]=='sec' && (a[3]=='crypto' && (a[4]=='foratt')))  || a[2]=='cron' || a[2]=='acchandler' || (a[2]=='minify' && (a[3]==undefined || a[3]=='res')))){
-        if(a[2]=='acchandler'){
-            mod.acchandler(req,res,path,port,os,fs,env);
-        } else if (a[2] == 'cron') { 
+    } else if (a[1] == 'sys' && ((a[2] == 'attenapply' && (a[3] != undefined && a[3] != '')) || (a[2] == 'isproxy' && (a[3] != undefined && a[3] != '')) || (a[2] == 'faceapi' && (a[3] == '1' || a[3] == '2')) || (a[2] == 'sec' && (a[3] == 'crypto' && (a[4] == 'foratt'))) || a[2] == 'cron' || a[2] == 'acchandler' || (a[2] == 'minify' && (a[3] == undefined || a[3] == 'res')))) {
+        if (a[2] == 'acchandler') {
+            mod.acchandler(req, res, path, port, os, fs, env);
+        } else if (a[2] == 'cron') {
             res.header('Content-Type', 'application/json');
-            if (req.query.pass=='atten'){
-                mod.cron(env,req,res);
+            if (req.query.pass == 'atten') {
+                mod.cron(env, req, res);
             } else {
-                res.send('{cronstat:"'+req.query.pass + ' not accepted"}');
+                res.send('{cronstat:"' + req.query.pass + ' not accepted"}');
             }
         } else if (a[2] == 'minify') {
             const css = await getfiles(fs, env.rootpath + '/host/css');
-            const html = await  getfiles(fs, env.rootpath + '/host/html');
-            const js = await  getfiles(fs, env.rootpath + '/host/js');
+            const html = await getfiles(fs, env.rootpath + '/host/html');
+            const js = await getfiles(fs, env.rootpath + '/host/js');
             let all = await addarray(html, css).then(e => e);
             all = await addarray(all, js).then(e => e);
             all = await onlyhcj(path, all);
-            mod.minify(all,env,res);
+            mod.minify(all, env, res);
             // res.header("Content-Type", "application/javascript");
             // res.send('{"status":"ok","msg":"ok"}');
         } else if (a[2] == 'faceapi') {
@@ -100,7 +100,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
                 res.redirect('/');
             }
         } else if (a[2] == 'sec') {
-            if (a[3] == 'crypto') { 
+            if (a[3] == 'crypto') {
                 if (a[4] == 'foratt') {
                     res.header("Content-Type", "application/json");
                     console.log('here')
@@ -124,7 +124,7 @@ async function apphandle(req, res, path, port, os, fs, env) {
                 const saltedStr = req.body.challange + t1.uid;
                 const generatedHash = crypto.createHash('sha256').update(saltedStr).digest('hex');
                 if (generatedHash == a[3]) {
-                    mod.applyatten(req.body.attc,res,t1,env);
+                    mod.applyatten(req.body.attc, res, t1, env);
                 } else {
                     res.send('{"stat":0,"error":"Challenge failed"}');
                 }
@@ -133,6 +133,8 @@ async function apphandle(req, res, path, port, os, fs, env) {
                 res.send('{"stat":0,"error":"session end or error occured"}');
             }
         }
+    } else if (a[1] == 'hn') {
+        res.send(os.hostname())
     } else{
         res.header("Content-Type", "text/html");
         res.render('index.min.html',{title:env.sitename});

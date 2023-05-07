@@ -1,0 +1,244 @@
+1.
+
+Abstract
+
+Keeping track of attendance is a vital aspect of managing any group or organization. It allows us to determine the strength of the workforce and ensure that everyone is actively contributing to their roles. However, recording attendance can be a time-consuming process, and traditional methods such as manual sign-in sheets can be prone to errors and manipulation.
+Biometric attendance systems, which use unique identifiers such as fingerprints or facial recognition, offer a more secure and reliable alternative. However, implementing such a system can be costly and time-consuming, and may not be practical for smaller organizations or teams.
+Another option is the use of RFID technology, which allows individuals to scan a card or tag to record their attendance. While this technology is faster and more convenient than traditional methods, it can still be expensive to implement and maintain, and requires every member of the team to have their own card or tag.
+To solve this issue, we can turn to basic JavaScript and Node.js libraries to create a simple and efficient attendance tracking system. By utilizing these libraries, we can easily create an online attendance platform that allows team members to sign in and out quickly and easily.
+This system is particularly useful for organizations with a large and geographically dispersed workforce, where traditional methods of attendance tracking may be impractical. By providing an online platform that is accessible from any device with an internet connection, we can ensure that attendance records are accurate, up-to-date, and easily accessible for management and HR teams or Students.
+In conclusion, while attendance tracking can be a challenging task, there are a variety of solutions available to make the process more efficient and reliable. By utilizing modern technology and software, we can create a system that is both accurate and convenient for everyone involved.
+
+
+Keywords: education, attendance system, Node JS, JavaScript, Automation, Web Application
+
+
+
+Introduction:
+
+The notion of developing a smartphone app to track attendance has grown more appealing in today's technologically advanced society. A mobile app can be a handy and effective tool to maintain attendance records as businesses and institutions work to increase efficiency. A well-designed attendance app can be a useful resource for businesses, organisations, and schools given the growing use of smartphones and other mobile devices.
+Administrators may easily record attendance by using an intelligent mobile app that automates the attendance process. Additionally, it enables organisations to track attendance efficiently by offering insights into attendance patterns and trends.
+In this project, we will investigate the essential elements and specifications for creating a smart mobile app for capturing attendance that meets the demands of both administrators and end users. We will construct a comprehensive solution that streamlines the attendance recording process and offers real-time analytics and reporting capabilities by utilising the most recent advancements in mobile app development.
+
+
+Existing System: 
+
+
+Currently, most companies and educational institutions still rely on traditional methods of attendance tracking, such as hardware installed at their physical locations, and in some cases, manual or biometric systems. While some forward-thinking organizations have begun implementing RFID technology for attendance tracking in newer facilities, this is not yet the norm.
+The use of hardware such as biometric scanners, card readers, or even basic time clocks remains a prevalent method of tracking attendance in workplaces and schools. These systems have been around for many years and are relatively easy to use and understand. However, they do require physical proximity to the device to be effective, which can pose challenges for larger organizations with multiple locations.
+Some newer organizations have started using RFID technology for attendance tracking, which allows for more flexibility and accuracy. RFID, or Radio Frequency Identification, is a wireless technology that allows for data to be transmitted via radio waves. This technology can be used to track attendance through the use of RFID-enabled ID cards or other wearable devices. This allows for more accurate tracking of attendance and can help reduce errors caused by manual input.
+
+
+
+RFID: 
+
+Radio Frequency Identification (RFID) is a wireless technology that has been in existence for several decades. RFID systems consist of a tag or a label containing a microchip and an antenna, which communicates with a reader via radio waves. The reader emits a signal that activates the RFID tag and transmits the information stored in its memory to the reader.
+RFID technology has been widely adopted in various industries, such as logistics, retail, and healthcare, for its ability to automate processes and provide real-time tracking and inventory management. In the retail industry, RFID tags are used for inventory management, tracking merchandise from the warehouse to the store shelves, and detecting theft. In the healthcare industry, RFID tags are used to track patients, medication, and medical equipment, improving patient safety and inventory management.
+RFID technology has also been used for attendance tracking in schools and businesses. RFID-enabled ID cards or other wearable devices can be used to track attendance accurately, reducing the risk of errors and ensuring compliance with attendance policies.
+
+Hardware based biomatric attendance:
+
+Hardware-based biometric attendance systems have been in use for several years in various organizations, such as businesses and schools, for accurate and secure attendance tracking. These systems typically use a biometric scanner, such as a fingerprint or facial recognition scanner, to identify and verify the identity of individuals.
+Biometric attendance systems offer several advantages over traditional attendance tracking methods, such as card readers or time clocks. Biometric data, such as fingerprints or facial features, are unique to each individual and cannot be duplicated or shared, providing a more secure and reliable method of attendance tracking.
+Moreover, hardware-based biometric attendance systems offer real-time attendance tracking, enabling organizations to monitor attendance and address any attendance-related issues promptly. They also eliminate the need for manual record-keeping and reduce errors, streamlining administrative processes.
+However, hardware-based biometric attendance systems can pose challenges in terms of cost and infrastructure. They require investment in hardware, software, and infrastructure to support the system, which can be a significant investment for smaller organizations. Additionally, they may require specialized training for the administrators and users to ensure the system's proper use.
+
+
+
+Example of Hardware based biomatric attendance of CHandigarh University:
+
+Chandigarh University uses small hardware attach to wall in every building and block with touch screen display, have fingerprint or face recognition to take attendance of teachers and other staff at starting and ending of shift.
+Chandigarh University has implemented a smart attendance system that utilizes small hardware devices attached to walls in every building and block on campus. These devices are equipped with a touch screen display and use either fingerprint or facial recognition technology to take attendance of teachers and other staff members at the beginning and end of their shifts.
+This hardware-based solution ensures accurate and efficient attendance tracking, eliminating the need for traditional manual attendance methods that can be time-consuming and prone to errors. The touch screen display also provides real-time feedback to the user, indicating whether their attendance has been successfully recorded or if there is an issue that needs to be addressed.
+The use of fingerprint or facial recognition technology provides an added layer of security and prevents any possibility of proxy attendance. This ensures that the attendance records are authentic and reliable, making the system ideal for use in academic and corporate environments.
+
+
+
+
+Manual Phisical attendance:
+
+
+Manual physical attendance is a system that has been in existence for many years, and it involves the traditional method of tracking attendance by physically marking attendance registers or sheets. This system is a non-plagiarized method and is widely used in various institutions, including schools, colleges, and workplaces, as it provides a reliable and accurate way of keeping track of attendance. With manual physical attendance, individuals can quickly and easily mark their presence by signing or writing their names, making it a straightforward and efficient method of attendance tracking. Additionally, manual physical attendance provides a level of security and accountability, as it is difficult to manipulate or tamper with the attendance records. While technological advancements have led to the development of electronic attendance systems, manual physical attendance remains a relevant and trusted method of attendance tracking in many settings.
+
+
+Central Database/Server:
+
+A central database/server is an existing system that has revolutionized the way data is managed and accessed by various applications. Our project, which is a smart attendance application, utilizes a central database system built on MongoDB Atlas. This system stores a wide range of information, including timetables, user profiles, and attendance records, providing a comprehensive solution for attendance tracking.
+One of the key advantages of a central database/server is its ability to store data securely and reliably. With MongoDB Atlas, our project benefits from a highly available and fault-tolerant database that ensures data is always accessible and protected against system failures. Additionally, the central database system provides a single source of truth for all the data, eliminating inconsistencies and errors that can arise when using multiple data sources.
+Another benefit of a central database/server is the scalability it provides. As our project grows and more users and data are added, the central database system can be easily scaled up to handle the increased demand without affecting performance or reliability.
+
+
+Cron Job:
+
+Cron Job is a time-based job scheduler in Unix-like operating systems that allows users to automate various tasks and processes. Our project utilizes a Cron Job to update the data in the active period and all periods table every hour, using the free service from cyclic.sh.
+The Cron Job system provides a reliable and efficient way to schedule recurring tasks, ensuring that they run automatically at set intervals. By setting up a Cron Job to update the data in our project's active period and all periods table every hour, we can ensure that the information is up-to-date and accurate.
+One of the key advantages of using a Cron Job is that it eliminates the need for manual updates, which can be time-consuming and prone to errors. With the automated updates provided by the Cron Job, we can be confident that the data in our project is always current and correct.
+
+
+Node JS:
+
+Node.js is a widely used open-source server-side runtime environment built on Chrome's V8 JavaScript engine. It is designed to enable developers to build scalable and high-performance web applications using JavaScript, a language traditionally used for front-end development. Node.js has become a popular choice for building server-side applications because of its ability to handle large volumes of traffic while remaining fast and efficient.
+One of the key advantages of Node.js is its event-driven, non-blocking I/O model, which enables it to handle multiple requests simultaneously without blocking the execution of other requests. This makes Node.js highly scalable and well-suited for building real-time applications such as chat applications, gaming applications, and online collaboration tools.
+Node.js also has a vast ecosystem of modules and libraries, which allows developers to easily add functionality to their applications without having to write everything from scratch. This ecosystem includes modules for everything from handling database connections to building web servers, making it easy to create complex and feature-rich applications quickly.
+
+
+Face-api.js
+
+Face-api.js is an open-source JavaScript library for face detection, recognition, and analysis in the browser or on Node.js servers. The library is built on top of TensorFlow.js, which is a popular library for building machine learning models in JavaScript.
+The face-api.js library provides a range of functionality for detecting faces in images, identifying facial landmarks, recognizing facial expressions, and estimating age and gender. The library uses deep learning models to perform these tasks and is trained on a large dataset of faces to achieve high accuracy and robustness.
+One of the key advantages of face-api.js is that it can be used directly in the browser, without the need for a server or complex setup. This makes it easy to integrate into web applications and enables developers to build rich and interactive user experiences.
+
+
+Javasript to use sensor camera and gps
+
+JavaScript is a powerful programming language that can be used to access a range of device sensors, including the camera and GPS. With the rise of mobile devices and the increasing availability of sensors, JavaScript has become an important tool for building web and mobile applications that require access to these sensors.
+One of the most common uses of JavaScript for accessing sensors is for building applications that use the camera to capture images or video. JavaScript can be used to access the camera on a device, capture images or video, and even manipulate the captured content. This functionality is useful for a wide range of applications, including video conferencing, social media applications, and augmented reality applications.
+Another important use of JavaScript for accessing sensors is for building applications that use GPS data to provide location-based services. With JavaScript, developers can access the GPS data on a device, track the location of a user, and provide relevant location-based information or services. This functionality is useful for a wide range of applications, including navigation apps, weather apps, and social media apps.
+
+
+Node js online hosting:
+
+Node.js is a powerful and versatile server-side runtime environment that is used by developers all over the world to build scalable and high-performance web applications. One of the key advantages of Node.js is that it can be easily hosted online, allowing developers to deploy their applications to the internet and make them accessible to users around the world.
+One popular option for hosting Node.js applications online is Cyclic.sh, which offers a range of hosting plans to suit different needs and budgets. With its free plan, developers can host their Node.js applications online for free and enjoy a range of features, including automatic SSL encryption, custom domain support, and easy deployment through Git.
+The Cyclic.sh platform is designed to be easy to use, with a user-friendly interface that makes it easy to manage your applications, view logs, and monitor performance. The platform also provides access to a range of tools and resources that can help developers optimize their applications for performance and scalability.
+
+
+Reporting and Analytics:
+
+Reporting and analytics are essential components of any attendance application that seeks to store and maintain proper records. With the help of reporting and analytics, the application can generate detailed reports and insights on attendance patterns, trends, and anomalies, providing valuable information to both teachers and administrators.
+Reporting in attendance applications can provide detailed information about individual attendance records, such as the dates and times of attendance, as well as summary information, such as the number of times a student was absent or present in a given period. This information can be used to identify patterns and trends, such as students who are consistently absent or late, and can be used to trigger interventions or support mechanisms.
+Analytics in attendance applications go beyond simple reporting by providing deeper insights into attendance patterns and trends. By using advanced algorithms and machine learning techniques, analytics can help identify patterns and trends that may not be immediately obvious, such as the impact of weather or other external factors on attendance rates. This information can be used to make data-driven decisions and interventions that can help improve attendance rates.
+
+
+
+Support and Maintenance:
+
+Support and maintenance are crucial aspects of any smart attendance system that seeks to provide reliable and consistent service to its users. A well-designed support and maintenance program can help ensure that the system remains functional and up-to-date, and can provide users with the resources they need to troubleshoot problems and address technical issues.
+Effective support for a smart attendance system involves a range of activities, such as providing technical assistance, responding to user inquiries, and monitoring system performance. A dedicated support team can help users troubleshoot issues and provide guidance on how to use the system effectively. They can also monitor system performance and identify issues before they become major problems, ensuring that the system remains stable and reliable.
+
+
+Implementation:
+
+Implementing a smart attendance application on Node.js and hosting it on the cloud using Cyclic.sh is a powerful combination that can offer a range of benefits to schools, institutions, and businesses. Node.js provides a scalable, efficient, and reliable platform for building web applications, while Cyclic.sh offers a convenient and cost-effective way to host and manage the application in the cloud.
+To implement a smart attendance application on Node.js, developers can leverage a range of libraries and frameworks, such as Express.js and MongoDB, to build a robust and scalable application. They can use technologies such as face recognition and GPS to provide advanced attendance tracking capabilities, and leverage tools such as reporting and analytics to generate insights and improve attendance rates.
+Once the application has been developed, it can be deployed and hosted on the cloud using Cyclic.sh. This cloud hosting platform offers a range of benefits, such as scalability, cost-effectiveness, and flexibility, making it an ideal choice for hosting web applications such as smart attendance systems.
+
+
+
+User Interface:
+
+The user interface is a critical aspect of any application, and a smart attendance system is no exception. To ensure that our system is user-friendly and accessible, we have developed our own small basic CSS that is clean, simple, and easy to use. However, we have also made sure to design our UI in a way that makes it easily upgradable to different CSS libraries, depending on the needs and preferences of our users.
+One of the key features of our UI is its support for light, dark, and system-based themes. This allows users to choose the theme that best suits their needs and preferences, whether they prefer a bright and airy interface or a dark and moody one. By providing support for system-based themes, we also ensure that our UI can adapt to the user's preferred theme settings on their device, providing a seamless and integrated user experience.
+
+
+
+
+Testing and Troubleshooting:
+
+
+Testing and troubleshooting are critical aspects of developing any software application, including a smart attendance system. To ensure that our system is reliable and bug-free, we have built-in testing and troubleshooting capabilities that can be easily performed in a localhost environment using Node.js and NPM.
+Node.js is an ideal platform for developing and testing web applications, and provides a range of tools and libraries for testing and debugging code. NPM, or Node Package Manager, is a powerful tool that allows developers to manage dependencies and packages, and can be used to install testing and debugging frameworks, such as Mocha or Jest.
+With these tools in hand, developers can easily test and troubleshoot the smart attendance system in a local environment, simulating various scenarios and use cases to identify and fix bugs and errors. They can also use testing frameworks to automate the testing process, saving time and effort and ensuring that the system is thoroughly tested and validated before deployment.
+
+
+
+Deployment and Maintenance:
+
+Deployment and maintenance are critical aspects of any software application, including a smart attendance system. To ensure that our system is always up-to-date and accessible, we have developed an efficient deployment and maintenance process that leverages the power of Git and cyclic.sh hosting.
+By linking our project on cyclic.sh with our Github repository and branch, we have created a seamless and automated deployment pipeline. Whenever we make a new commit to our Github repository, cyclic.sh automatically starts the deployment process, which updates the project on their Node.js hosting environment and makes it available online for users to access.
+This deployment process is not only efficient, but it also ensures that our system is always up-to-date and secure, with the latest bug fixes and feature enhancements. We can also use this process to roll back to a previous version of the system if needed, providing a safety net in case of any issues or bugs.
+In addition to deployment, maintenance is also a critical aspect of the system. To ensure that our system is always running smoothly, we regularly perform maintenance tasks such as updates, backups, and security checks. This helps to ensure that our system remains reliable and secure, and that our users can access the system whenever they need it.
+
+
+
+
+
+
+
+
+2. 
+
+Innovation in modelling
+
+
+Our attendance application for smartphones is a powerful tool that has been designed to provide a seamless attendance tracking experience. The application is built on Node.js, which provides a solid foundation for building robust and scalable applications.
+To ensure that our application meets the highest standards of security and functionality, we have incorporated several powerful libraries including bcryptjs, body-parser, compression, cookie-parser, cors, crypto, ejs, express, jsonwebtoken, lodash, mongodb, and uuid. These libraries enable us to build a feature-rich application that leverages the full power of JavaScript to access camera and location by GPS.
+We also use an IP check using ipinfo.io to ensure that the attendance taken is fair and free of any proxy service. This helps us to maintain the integrity of the attendance records and ensure that they accurately reflect the attendance of each individual.
+Additionally, our attendance application is not limited to just smartphones. We also have a web-based application that is optimized for desktops, as well as a PWA (Progressive Web App) that allows users to install the application directly onto their device for easy access.
+
+
+
+
+3.
+
+Some Common Mistakes:
+
+The smart attendance application currently incorporates face detection at the client-side to maximize the efficient utilization of resources. We have chosen a free hosting service that offers limited resources to ensure that the application runs seamlessly. However, as we plan to scale up in the future, we intend to shift the face detection feature to the server-side. The user interface is designed to be simple and user-friendly, enabling users to navigate and utilize the application effortlessly. We are continuously working to enhance the UI and introduce new features to improve the user experience. We have also faced some compatibility issues with certain decrypted libraries during the development process, but we have resolved them to ensure that the application runs smoothly.
+
+
+
+
+4. 
+
+Project Completion:
+
+The development of our smart attendance application for smartphones is a significant achievement. The application is built on the reliable Node.js platform and utilizes various powerful libraries such as bcryptjs, body-parser, compression, cookie-parser, cors, crypto, ejs, express, jsonwebtoken, lodash, mongodb, and uuid. These libraries provide the necessary functionality to create a feature-rich and scalable application. By leveraging the full capabilities of JavaScript, our application can access the camera and location via GPS, enabling efficient attendance tracking.
+To ensure that attendance records are fair and accurate, we use an IP check using ipinfo.io to identify and eliminate any proxy services. This helps us to maintain the integrity of the attendance records and ensure that they accurately reflect the attendance of each individual.
+Moreover, our application is not limited to smartphones. We also have a web-based application optimized for desktops, as well as a PWA (Progressive Web App) that can be installed directly onto the device. Our application has a user-friendly interface, allowing users to easily access and utilize the attendance tracking features.
+We are committed to continuously improving our application and will continue to work on enhancing the UI, adding new features, and optimizing the application's performance. The completion of this project marks a significant milestone in our efforts to develop a reliable, secure, and efficient attendance tracking system.
+
+
+Target Accomplishment:
+
+The target accomplishment of our research was to develop a smart attendance application that could efficiently track attendance records for teachers and staff members. To achieve this, we designed an application that could be used on smartphones, desktops, and as a Progressive Web App (PWA) for easy access.
+The application leverages the full power of JavaScript to access the camera and location via GPS, making the process of attendance-taking seamless and efficient. We have also incorporated an IP check using ipinfo.io to ensure that the attendance taken is fair and free of any proxy service.
+In addition to the smartphone application, we have optimized the web-based application for desktops, making it accessible from any device. We have also included a PWA that allows users to install the application directly onto their device for easy access.
+
+
+
+
+5.
+
+Discussion:
+
+Our research paper discusses the development and implementation of a smart attendance application for smartphones that utilizes Node.js, various libraries, and features of JavaScript to access camera and location by GPS for a seamless attendance tracking experience. Our system includes both a web-based application optimized for desktops and a PWA for easy access and installation onto devices.
+
+Advantages:
+Our smart attendance application provides a number of advantages over traditional attendance tracking methods. Firstly, it eliminates the need for manual entry of attendance data, which can be a time-consuming and error-prone process. Secondly, it provides real-time attendance tracking, which allows for timely interventions in case of absenteeism. Thirdly, our application provides a fair and accurate attendance record, with the use of IP checks and face detection at the client-side. Finally, the application is user-friendly and accessible on both smartphones and desktops, making attendance tracking easier and more convenient.
+
+Challenges and Limitations:
+The development and implementation of our smart attendance application also faced some challenges and limitations. The main challenge was ensuring the security and privacy of attendance data. This was addressed through the use of various libraries and IP checks to prevent proxy service and fair attendance records. The limitation of our current system is that the face detection feature is currently implemented at the client-side, which can be resource-intensive. However, we plan to transfer this feature to the server-side in the future once we have the required resources.
+
+Future Scope and Enhancements:
+Our smart attendance application has a lot of potential for future enhancements and improvements. We plan to incorporate AI-based face recognition for more efficient attendance tracking. Additionally, we plan to integrate with other systems such as HR software to provide a comprehensive attendance management solution. We also plan to improve the user interface and add more features for an enhanced user experience.
+
+Practical Applications:
+Our smart attendance application has a wide range of practical applications. It can be used in various educational institutions, government organizations, and private companies for efficient attendance tracking. Additionally, it can be used in healthcare settings to track employee attendance and ensure timely patient care. The application can also be used in events and conferences for smooth attendance management.
+
+Conclusion:
+In conclusion, our smart attendance application provides a reliable, efficient, and user-friendly attendance tracking solution. The application has a number of advantages over traditional attendance tracking methods, including real-time tracking and fair attendance records. The application also faces challenges and limitations, which can be addressed through future enhancements and improvements. The practical applications of our application are vast and can benefit various industries.
+
+
+
+ Acknowledgment 
+
+ We would like to express our gratitude to Mr. Gaurav Soni and Mrs. Ramanjot Kaur, Assistant Professors of the CSE department at Chandigarh University. Their guidance and mentorship have been invaluable in shaping our skills and leading us towards successful completion of our project. We would also like to extend our appreciation to our university for providing us with the opportunity to think creatively and develop an innovative project. Without their support and encouragement, we would not have been able to achieve this level of success.
+
+
+
+References
+
+[1] Al-Ali, A. R., Al-Othman, A. K., & Al-Ali, H. R. (2019). Smart attendance system using QR code and mobile application. Journal of Engineering and Applied Sciences, 14(8), 2467-2472.
+[2] Bae, Y. C., & Kim, K. M. (2018). A study on the development of a smart attendance management system using BLE Beacon. Journal of the Korea Institute of Information and Communication Engineering, 22(1), 117-123.
+[3] Bhadoria, S., & Agarwal, P. (2020). Facial recognition based smart attendance system. International Journal of Engineering and Advanced Technology, 9(1), 465-469.
+[4] Node.js. (n.d.). Retrieved April 30, 2023, from https://nodejs.org/en/.
+[5] ipinfo. (n.d.). IP Geolocation and Online Fraud Prevention. Retrieved April 30, 2023, from https://ipinfo.io/.
+[6] MongoDB. (n.d.). Retrieved April 30, 2023, from https://www.mongodb.com/.
+[7] OpenCV. (n.d.). OpenCV. Retrieved April 30, 2023, from https://opencv.org/.
+[8] Progressive Web Apps. (n.d.). Retrieved April 30, 2023, from https://web.dev/progressive-web-apps/.
+[9] React Native. (n.d.). Retrieved April 30, 2023, from https://reactnative.dev/.
+[10] Sharma, R., Gupta, D., & Vijayvargiya, G. (2021). Smart attendance system using face recognition and cloud computing. International Journal of Engineering Research and Applications, 11(2), 26-31.
+
+
+
+

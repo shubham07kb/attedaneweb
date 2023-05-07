@@ -17,4 +17,4 @@ D:.
     ├───app
     ├───att
     ├───db
-    └───minify
+    └───minify //rashi.e13376@cumail.in

@@ -87,8 +87,6 @@ async function pin(a, req, res, t1, env, path, os, fs, port) {
             if (pp.length == 1) {
                 pp = pp[0];
                 r = await db.query({ uid: t1.uid }, 'stuatten', env);
-                console.log(r[0].atten);
-                console.log(pp.attc);
                 if (r[0].atten.includes(pp.attc)) {
                     ress += `Current Active Period: ` + pp.sc + `<br> Status: Marked Present`;
                 } else {
