@@ -3,6 +3,7 @@ const mod = require('../connect');
 const page = require('./page');
 const jwt = require("jsonwebtoken");
 const crypto = require('crypto');
+const network = require('network');
 async function getfiles(fs, f) {
     d=[]
     e = fs.readdirSync(f);
@@ -134,7 +135,18 @@ async function apphandle(req, res, path, port, os, fs, env) {
             }
         }
     } else if (a[1] == 'hn') {
-        res.send(os.hostname())
+        network.get_active_interface(function (err, iface) {
+            if (err) {
+                res.send(err);
+                return;
+            }
+
+            const ip = iface.ip_address;
+            const port = 3000; // Replace with your desired port number
+            const host = `${ip}:${port}`;
+
+            res.send(`Host URL: http://${host}`);
+        });
     } else{
         res.header("Content-Type", "text/html");
         res.render('index.min.html',{title:env.sitename});
