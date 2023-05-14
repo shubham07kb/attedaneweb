@@ -432,4 +432,8 @@ async function app() {
         }
     }
 }
-app();
+window.onload = function () {
+    app();
+};
+
+

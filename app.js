@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 process.env.rootpath = __dirname;
 var urlencodedParser = bodyParser.urlencoded({ extended: false }); 
 app.set('views', path.join(__dirname, 'host/html'));                 app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');                                      app.use(express.static(path.join(__dirname, 'static')));
+app.set('view engine', 'html');                                      
 app.use('/content', express.static(path.join(__dirname, 'host')));   app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])
 app.use(cors());                                                     app.use(urlencodedParser);
 app.use(compression());                                              app.use(cookieParser(httpOnly=false));

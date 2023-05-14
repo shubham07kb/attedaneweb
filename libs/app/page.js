@@ -109,14 +109,18 @@ async function pin(a, req, res, t1, env, path, os, fs, port) {
             t = t[0];
             subal = {};
             subaln = {};
+            allsub = [];
             for (const property in t.st) {
                 subal[property] = [];
                 subaln[property] = [];
+                allsub.push(property);
             }
             r.atten.forEach(element => {
-                subal[element.sc].push(element.attc);
-                if (j.atten.includes(element.attc)) {
-                    subaln[element.sc].push(element.attc);
+                if (allsub.includes(element.sc)){
+                    subal[element.sc].push(element.attc);
+                    if (j.atten.includes(element.attc)) {
+                        subaln[element.sc].push(element.attc);
+                    }
                 }
             });
             ress = `<h1 style="text-align:center;">Attendance</h1><br><br><table style="width:100%;border:1px solid blue"><tr style="border:1px solid blue"><th style="border:1px solid blue">Subject</th><th style="border:1px solid blue">Total Lecture</th><th style="border:1px solid blue">Attended</th><th style="border:1px solid blue">Percentage</th><th style="border:1px solid blue">Exam Status</th></tr>`;
